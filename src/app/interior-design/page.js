@@ -10,7 +10,7 @@ import { FaAngleRight } from "react-icons/fa6";
 
 
 
-export default function page() {
+export default function Page() {
     const [currentFaqId, setCurrentFaqId] = useState(0)
     let faqs = [
         { id: "1", question: 'What is diff ?', answer: 'diff full full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form form is difference' },
@@ -126,7 +126,7 @@ export default function page() {
                     <div className='shadow-2xl p-10 rounded-2xl lg:h-[550px] '>
                         <h4 className='text-[30px] text-gray-900 mb-3'>Earn the Certificate of Completion</h4>
                         <p className='text-gray-700 mb-3'>Unlock greater career opportunities and a better LinkedIn profile with an added certificate.</p>
-                        <img className='w-[500px] h-[350px] object-contain' src='https://marketplace.canva.com/EAFCP1Ox_-c/1/0/1600w/canva-blue-yellow-minimalist-internship-certificate-RR9ND_Uk1Bw.jpg' />
+                        <Image alt='' className='w-[500px] h-[350px] object-contain' src='https://marketplace.canva.com/EAFCP1Ox_-c/1/0/1600w/canva-blue-yellow-minimalist-internship-certificate-RR9ND_Uk1Bw.jpg' />
                     </div>
 
                     {/* section 4 */}
