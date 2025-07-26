@@ -7,6 +7,7 @@ import { FaPlayCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaChevronUp } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa6";
+import Image from 'next/image';
 
 
 
