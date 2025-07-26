@@ -16,11 +16,13 @@ import {
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
@@ -40,16 +42,19 @@ const rubik = Rubik({
 
 const freckle = Freckle_Face({
   variable: "--font-freckle",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
 const caprasimo = Caprasimo({
   variable: "--font-caprasimo",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
 const fjalla = Fjalla_One({
   variable: "--font-fjalla",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
@@ -62,6 +67,7 @@ const savate = Savate({
 
 const sevillana = Sevillana({
   variable: "--font-sevillana",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
