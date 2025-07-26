@@ -1,73 +1,14 @@
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import MainLayout from "./common/MainLayout";
 
-// ✅ Import all fonts from next/font/google
-import {
-  Geist,
-  Geist_Mono,
-  Poppins,
-  Rubik,
-  Freckle_Face,
-  Caprasimo,
-  Fjalla_One,
-  Savate,
-  Sevillana,
-} from "next/font/google";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-});
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-});
-
-const rubik = Rubik({
-  variable: "--font-rubik",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-});
-
-const freckle = Freckle_Face({
-  variable: "--font-freckle",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-});
-
-const caprasimo = Caprasimo({
-  variable: "--font-caprasimo",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-});
-
-const fjalla = Fjalla_One({
-  variable: "--font-fjalla",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-});
-
-const savate = Savate({
-  variable: "--font-savate",
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-});
-
-const sevillana = Sevillana({
-  variable: "--font-sevillana",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
@@ -78,33 +19,27 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`
-        ${geistSans.variable} 
-        ${geistMono.variable} 
-        ${poppins.variable} 
-        ${rubik.variable}
-        ${freckle.variable}
-        ${caprasimo.variable}
-        ${fjalla.variable}
-        ${savate.variable}
-        ${sevillana.variable}
-      `}
-    >
+    <html lang="en">
       <head>
-        {/* ✅ Keep only external CSS like slick-carousel */}
+        <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Fjalla+One&family=Freckle+Face&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Savate:ital,wght@0,200..900;1,200..900&family=Sevillana&display=swap" rel="stylesheet"></link>
         <link
           rel="stylesheet"
+          type="text/css"
+
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
         />
         <link
           rel="stylesheet"
+          type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
         />
       </head>
-      <body className="antialiased">
-        <MainLayout>{children}</MainLayout>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <MainLayout>
+          {children}
+        </MainLayout>
       </body>
     </html>
   );
