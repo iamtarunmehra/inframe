@@ -202,7 +202,7 @@ export default function Page() {
                                         <h6 onClick={() => {
                                             setCurrentFaqId(item.id)
                                             currentFaqId === item.id && setCurrentFaqId(0)
-                                        }} className='w-[100%] text-[20px] py-[12px] cursor-pointer px-[20px] border-[1px] mt-[20px] bg-amber-300 border-amber-300 rounded-t-lg flex justify-between items-center'>
+                                        }} className='w-[100%] lg:text-[20px] text-[16px] py-[12px] cursor-pointer px-[20px] border-[1px] mt-[20px] bg-amber-300 border-amber-300 rounded-t-lg flex justify-between items-center'>
                                             {item.question}
                                             <FaAngleRight className='text-[20px]' />
                                         </h6>
