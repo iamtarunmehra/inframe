@@ -158,7 +158,7 @@ export default function Page() {
 
                 {/* section 5 */}
                 <div className='lg:my-[60px] my-[20px] lg:p-0 p-3'>
-                    <h2 className='text-[35px] text-gray-800 font-semibold mb-5'>What you'll learn</h2>
+                    <h2 className='text-[35px] text-gray-800 font-semibold mb-5'>What you&#39;ll learn</h2>
                     <div className='grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-7'>
 
                         <p className='grid grid-cols-[8%_auto] shadow-md shadow-amber-400 items-start border-[1px] p-3 rounded-md border-amber-300 gap-2 h-[auto] text-[16px] text-gray-700'><AiOutlineSwapRight className='text-[25px] text-amber-500' /> How to design & develop websites without coding knowledge</p>
@@ -171,7 +171,7 @@ export default function Page() {
 
                         <p className='grid grid-cols-[8%_auto] shadow-md shadow-amber-400 items-start border-[1px] p-3 rounded-md border-amber-300 gap-2 h-[auto] text-[16px] text-gray-700'><AiOutlineSwapRight className='text-[25px] text-amber-500' />How to start your own home-based web design business.</p>
                         <p className='grid grid-cols-[8%_auto] shadow-md shadow-amber-400 items-start border-[1px] p-3 rounded-md border-amber-300 gap-2 h-[auto] text-[16px] text-gray-700'><AiOutlineSwapRight className='text-[25px] text-amber-500' />How to Create Products Easily</p>
-                        <p className='grid grid-cols-[8%_auto] shadow-md shadow-amber-400 items-start border-[1px] p-3 rounded-md border-amber-300 gap-2 h-[auto] text-[16px] text-gray-700'><AiOutlineSwapRight className='text-[25px] text-amber-500' />What is a Website and What is WordPress, it's advantages, etc
+                        <p className='grid grid-cols-[8%_auto] shadow-md shadow-amber-400 items-start border-[1px] p-3 rounded-md border-amber-300 gap-2 h-[auto] text-[16px] text-gray-700'><AiOutlineSwapRight className='text-[25px] text-amber-500' />What is a Website and What is WordPress, it&#39;s advantages, etc
                         </p>
                     </div>
                 </div>
