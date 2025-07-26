@@ -13,6 +13,9 @@ import Image from 'next/image';
 
 export default function Page() {
     const [currentFaqId, setCurrentFaqId] = useState(0)
+    const [preview, setPreview] = useState(false)
+    const [secondPreview, setSecondPreview] = useState(false)
+
     let faqs = [
         { id: "1", question: 'What is diff ?', answer: 'diff full full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form full form form is difference' },
         { id: "2", question: 'What opportunity does Bizgurukul provide ?', answer: 'difull ffull form full form full form orm full form full form full form ff full ffull form full form full form full form full form full form full form full form orm full form full form full form full form full form full form  full form full form is difference' },
@@ -35,10 +38,63 @@ export default function Page() {
         { id: "9", title: "Creating Content On The Homepage With Elementor (Continues...)", duration: '1:02:04' },
     ]
 
+    const handlePreview = (id) => {
+        id === '1' && setPreview(true)
+        id === '2' && setSecondPreview(true)
+    }
+
 
     return (
         <>
-            <div className='w-[100%] lg:my-[60px] my-[20px]'>
+            {/* for overlay  */}
+            {(preview || secondPreview) && <div className='fixed w-[100%] h-[100vh] bg-[rgba(0,0,0,0.7)] z-[10]'></div>}
+
+            {/* for previews */}
+            {preview && (
+                <div className="fixed inset-0 z-20 flex items-center justify-center bg-black/40">
+                    <div className="w-[90%] max-w-[900px] aspect-video bg-white rounded-[10px] relative">
+                        <iframe
+                            className="absolute top-0 left-0 w-full h-full rounded-[10px]"
+                            src="https://player.vimeo.com/video/1104707814?badge=0&autopause=0&player_id=0&app_id=58479&loop=1"
+                            allow="autoplay; fullscreen"
+                            allowFullScreen
+                            title="Introduction"
+                        ></iframe>
+                        <span
+                            onClick={() => setPreview(false)}
+                            className="absolute -top-4 -right-4 cursor-pointer hover:bg-amber-400 transition duration-300 text-[25px] bg-gray-300 rounded-full py-[5px] px-[15px]"
+                        >
+                            &times;
+                        </span>
+                    </div>
+                </div>
+            )}
+
+            {secondPreview && (
+                <div className="fixed inset-0 z-20 flex items-center justify-center bg-black/40">
+                    <div className="w-[90%] max-w-[900px] aspect-video bg-white rounded-[10px] relative">
+                        <iframe
+                            className="absolute top-0 left-0 w-full h-full rounded-[10px]"
+                            src="https://player.vimeo.com/video/1104723677?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&loop=1"
+                            allow="autoplay; fullscreen"
+                            allowFullScreen
+                            title="Basics"
+                        ></iframe>
+                        <span
+                            onClick={() => setSecondPreview(false)}
+                            className="absolute -top-4 -right-4 cursor-pointer hover:bg-amber-400 transition duration-300 text-[25px] bg-gray-300 rounded-full py-[5px] px-[15px]"
+                        >
+                            &times;
+                        </span>
+                    </div>
+                </div>
+            )}
+
+
+
+            <div className='w-[100%] lg:my-[60px] sm:my-[20px]'>
+
+
                 <div className='max-w-7xl mx-auto grid lg:grid-cols-[65%_auto] p-3 lg:p-0 grid-cols-1 lg:gap-10 gap-5'>
 
                     {/* left section */}
@@ -78,11 +134,11 @@ export default function Page() {
             </div>
 
 
-            <div className='max-w-[1320px] mx-auto '>
+            <div className='max-w-[1320px] p-3 lg:p-0 mx-auto '>
 
 
                 {/* section 2 */}
-                <div className='w-[90%] mx-auto'>
+                <div className='w-[100%] mx-auto'>
                     <h3 className='text-[30px] text-gray-900 mb-3'>Course Content</h3>
                     <p className='flex gap-5'>
                         <span>Section 1</span>
@@ -94,7 +150,7 @@ export default function Page() {
                             <thead>
                                 <tr className='bg-gray-100'>
                                     <th className='lg:block hidden text-start px-3 py-3 border-b border-gray-300'>Play</th>
-                                    <th className='text-start px-5 py-3  border-b border-gray-300'>Course</th>
+                                    <th className='text-start px-1 py-3  border-b border-gray-300'>Course</th>
                                     <th className='text-end px-3 py-3 border-b border-gray-300'>Preview</th>
                                     <th className='text-end px-3 py-3 border-b border-gray-300'>Duration</th>
                                 </tr>
@@ -102,12 +158,17 @@ export default function Page() {
                             <tbody className=''>
                                 {data.map((item, index) => {
                                     return (
-                                        <tr key={index} className={`hover:bg-gray-50 ${(item.id === '1' || item.id === '2') ? 'text-black' : 'text-gray-500'}`}>
-                                            <td className='lg:block hidden border-b px-3 py-3 border-gray-300'><FaPlayCircle className='text-[22px]' /></td>
-                                            <td className=' border-b px-5 py-3 border-gray-300'>{item.title}</td>
-                                            <td className=' border-b px-3 py-3 border-gray-300 text-blue-600 cursor-pointer text-end'>{(item.id === '1' || item.id === '2') && <span>Preview</span>}</td>
-                                            <td className=' border-b px-3 py-3 border-gray-300 text-end'>{item.duration}</td>
-                                        </tr>
+                                        <>
+                                            <tr key={index} className={`hover:bg-gray-50 ${(item.id === '1' || item.id === '2') ? 'text-black' : 'text-gray-500'}`}>
+                                                <td className='lg:block hidden border-b px-3 py-3 border-gray-300'><FaPlayCircle className='text-[22px]' /></td>
+                                                <td className=' border-b px-1 py-3 border-gray-300'>{item.title}</td>
+                                                <td className=' border-b px-3 py-3 border-gray-300 text-blue-600 cursor-pointer text-end'>{(item.id === '1' || item.id === '2') && <span onClick={() => handlePreview(item.id)}>Preview</span>}</td>
+                                                <td className=' border-b px-3 py-3 border-gray-300 text-end'>{item.duration}</td>
+                                            </tr>
+
+                                        </>
+
+
                                     )
                                 })}
                             </tbody>
@@ -127,7 +188,7 @@ export default function Page() {
                     <div className='shadow-2xl p-10 rounded-2xl lg:h-[550px] '>
                         <h4 className='text-[30px] text-gray-900 mb-3'>Earn the Certificate of Completion</h4>
                         <p className='text-gray-700 mb-3'>Unlock greater career opportunities and a better LinkedIn profile with an added certificate.</p>
-                        <Image alt='' className='w-[500px] h-[350px] object-contain' src='https://marketplace.canva.com/EAFCP1Ox_-c/1/0/1600w/canva-blue-yellow-minimalist-internship-certificate-RR9ND_Uk1Bw.jpg' />
+                        <Image width={500} height={350} alt='' className='w-[500px] h-[350px] object-contain' src='https://marketplace.canva.com/EAFCP1Ox_-c/1/0/1600w/canva-blue-yellow-minimalist-internship-certificate-RR9ND_Uk1Bw.jpg' />
                     </div>
 
                     {/* section 4 */}
@@ -175,7 +236,9 @@ export default function Page() {
                         </p>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
+
+
 }
