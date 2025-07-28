@@ -163,30 +163,26 @@ export default function Page() {
                 </div>
             )}
 
-
-
-            <div className='w-[100%] bg-gray-100 lg:py-[40px] lg:mb-10 sm:py-[20px]'>
+            <div className='w-[100%] bg-gray-200 lg:py-[40px] lg:mb-10 sm:py-[20px]'>
 
                 <div className='max-w-7xl mx-auto grid lg:grid-cols-[65%_auto] p-3 lg:p-0 grid-cols-1 lg:gap-10 gap-5'>
 
                     {/* left section */}
                     <div>
-
-                        {/* section 1 */}
-                        <h3 className='text-[30px] mb-5 capitalize text-gray-800'>{title} : {singleCourse.description}</h3>
-                        <iframe className='rounded-[10px]' width="100%" height="400" src="https://www.youtube.com/embed/e_dv7GBHka8"></iframe>
-                        <div className='lg:my-[60px] my-[20px]'>
-                            <h4 className='text-[25px] font-semibold text-gray-900 mb-3'>About this course</h4>
-                            <p className=''>{singleCourse.aboutCourse}</p>
+                        <h3 className='text-[30px] lg:shadow-sm bg-white border-amber-500 py-[15px] px-5 rounded-xl mb-7 capitalize text-gray-700 '><span className='font-semibold text-[30px] text-amber-500'>{title}</span> - {singleCourse.description}</h3>
+                        <iframe className='rounded-t-[10px]' width="100%" height="400" src="https://www.youtube.com/embed/e_dv7GBHka8"></iframe>
+                        <div className='lg:my-[0px] shadow-lg my-[20px] bg-white p-5 rounded-b-[15px]'>
+                            <h4 className='text-[30px] font-semibold text-amber-500 mb-3 '>About this course</h4>
+                            <p className='text-[20px]'>{singleCourse.aboutCourse}</p>
                         </div>
                     </div>
 
                     {/* right section */}
                     <div className='bg-white shadow-md  rounded-[15px] lg:p-5 p-3'>
-                        <button className="mb-4 px-5 py-2 bg-yellow-100 text-yellow-700 border border-yellow-400 rounded-full text-sm font-medium">
+                        <button className="mb-4 px-5 py-2 bg-yellow-100 text-amber-600 border border-yellow-400 rounded-full text-sm font-medium">
                             Limited Period Only
                         </button><br />
-                        <span className='flex items-center gap-2 text-[40px] font-semibold text-orange-600 my-[15px]'><LiaRupeeSignSolid /> {singleCourse.price}/-</span>
+                        <span className='flex items-center gap-2 text-[40px] font-semibold text-amber-500 my-[15px]'><LiaRupeeSignSolid /> {singleCourse.price}/-</span>
                         <ul>
                             <li className='my-[10px] capitalize text-[20px] text-gray-800 flex items-center gap-2'><GoDotFill /> Language - Hindi</li>
                             <li className='my-[10px] capitalize text-[20px] text-gray-800 flex items-center gap-2'><GoDotFill /> can watch anytime</li>
@@ -198,30 +194,30 @@ export default function Page() {
                             <li className='my-[10px] capitalize text-[20px] text-gray-800 flex items-center gap-2'><GoDotFill /> Learn at Your Own Pace</li>
                         </ul>
                         <div className='grid grid-cols-2 gap-5 mt-7'>
-                            <button className='py-[10px] cursor-pointer bg-gray-300 border-[1px] hover:border-gray-700  border-transparent rounded-md'>Add To Cart</button>
-                            <button className='py-[10px] text-white cursor-pointer bg-orange-400 hover:bg-orange-500 duration-300 rounded-md'>Buy Now</button>
+                            <button className='py-[10px] cursor-pointer bg-gray-300 duration-300 border-[1px] hover:border-gray-700  border-transparent rounded-md'>Add To Cart</button>
+                            <button className='py-[10px] text-white cursor-pointer bg-amber-500 hover:bg-amber-600 duration-300 rounded-md'>Buy Now</button>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <div className='w-[100%] bg-white lg:py-[20px] lg:mb-10 sm:py-[20px]'>
+            <div className='w-[100%] bg-white lg:py-[20px] lg:my-[60px] my-[40px] sm:py-[20px]'>
                 <div className='max-w-7xl p-3 lg:p-0 mx-auto '>
                     <h3 className='text-[30px] text-gray-900 mb-3'>Course Content</h3>
                     <p className='flex gap-5'>
-                        <span>Section 1</span>
-                        <span>24 Lectures</span>
-                        <span>6Hr.0 Min.</span>
+                        <span className='lg:text-[20px]'>Section 1</span>
+                        <span className='lg:text-[20px]'>24 Lectures</span>
+                        <span className='lg:text-[20px]'>6Hr.0 Min.</span>
                     </p>
                     <div className={`${videoSectionOpen ? 'h-auto' : 'h-[310px] overflow-hidden'}`}>
                         <div className="overflow-x-auto">
                             <table className="w-full my-5 border border-gray-300 text-sm">
                                 <thead>
-                                    <tr className="bg-gray-100 text-left">
+                                    <tr className="bg-gray-100 text-left text-[17px]">
                                         <th className="lg:table-cell hidden px-4 py-3 border-b border-gray-300">Play</th>
                                         <th className="px-4 py-3 border-b border-gray-300">Course</th>
-                                        <th className="text-right px-4 py-3 border-b border-gray-300">Preview</th>
+                                        <th className="text-right px-4 py-3 border-b border-gray-300">Action</th>
                                         <th className="text-right px-4 py-3 border-b border-gray-300">Duration</th>
                                     </tr>
                                 </thead>
@@ -236,13 +232,13 @@ export default function Page() {
                                             <td className="lg:table-cell hidden px-4 py-3 border-b border-gray-300">
                                                 <FaPlayCircle className="text-xl" />
                                             </td>
-                                            <td className="px-4 py-3 border-b border-gray-300">{item.title}</td>
-                                            <td className="px-4 py-3 border-b border-gray-300 text-right text-blue-600 cursor-pointer">
+                                            <td className="lg:text-[20px] px-4 py-3 border-b border-gray-300">{item.title}</td>
+                                            <td className="lg:text-[17px] px-4 py-3 border-b border-gray-300 text-right text-blue-600 cursor-pointer">
                                                 {(item.id === '1' || item.id === '2') && (
                                                     <span onClick={() => handlePreview(item.id)}>Preview</span>
                                                 )}
                                             </td>
-                                            <td className="px-4 py-3 border-b border-gray-300 text-right">
+                                            <td className="lg:text-[18px] px-4 py-3 border-b border-gray-300 text-right">
                                                 {item.duration}
                                             </td>
                                         </tr>
@@ -260,15 +256,14 @@ export default function Page() {
                     }
                     </button></div>
                 </div>
-
             </div>
 
 
             <div className='w-[100%] bg-gray-100 lg:py-[20px] lg:mb-10 sm:py-[20px]'>
                 <div className='max-w-7xl p-3 lg:p-0 mx-auto '>
-                    <div className='lg:p-0 p-3 grid lg:grid-cols-[35%_auto] md:grid-cols-2 grid-cols-1 lg:gap-15 gap-5 lg:my-[60px] my-[20px]'>
+                    <div className='grid lg:grid-cols-[35%_auto] md:grid-cols-2 grid-cols-1 lg:gap-15 gap-15 lg:my-[60px] my-[20px]'>
                         {/* section 3 */}
-                        <div className='shadow-2xl bg-white p-10 rounded-2xl lg:h-[550px] '>
+                        <div className='shadow-2xl bg-white lg:p-10 p-5 lg:rounded-2xl lg:h-[550px] '>
                             <h4 className='text-[30px] text-gray-900 mb-3'>Earn the Certificate of Completion</h4>
                             <p className='text-gray-700 mb-3'>Unlock greater career opportunities and a better LinkedIn profile with an added certificate.</p>
                             <Image width={500} height={350} alt='' className='w-[500px] h-[350px] object-contain' src='https://marketplace.canva.com/EAFCP1Ox_-c/1/0/1600w/canva-blue-yellow-minimalist-internship-certificate-RR9ND_Uk1Bw.jpg' />
@@ -287,9 +282,9 @@ export default function Page() {
                                                 currentFaqId === item.id && setCurrentFaqId(0)
                                             }} className={`${item.id === currentFaqId ? 'rounded-t-lg' : 'rounded-lg'} w-[100%] lg:text-[20px] text-[16px] py-[12px] cursor-pointer px-[20px] border-[2px] mt-[20px] bg-white border-gray-300 text-gray-700  flex justify-between items-center`}>
                                                 {item.question}
-                                                <FaAngleRight className='text-[20px] ' />
+                                                <FaAngleRight className='lg:text-[20px] ' />
                                             </h6>
-                                            <div className={`${currentFaqId === item.id ? 'h-auto opacity-[1]' : 'h-0 scale-0 opacity-0'} text-gray-900 p-3 rounded-b-lg bg-white border-[2px] border-gray-300 text-[16px] left-0 duration-300 w-[100%] origin-top`}>
+                                            <div className={`${currentFaqId === item.id ? 'h-auto opacity-[1]' : 'h-0 scale-0 opacity-0'} text-gray-900 p-3 rounded-b-lg  border-[2px] border-gray-300 bg-gray-300 text-[16px] left-0 duration-300 w-[100%] origin-top`}>
                                                 {item.answer}
                                             </div>
                                         </div>

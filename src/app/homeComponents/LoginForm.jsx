@@ -1,8 +1,12 @@
 'use client'
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
 import { IoMdClose } from "react-icons/io";
+import Swal from 'sweetalert2';
 
 export default function LoginForm({ loginForm, setLoginForm, setRegisterForm }) {
+
+
     return (
         loginForm && (
             <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[400px] w-[95%] bg-white rounded-2xl shadow-xl border border-amber-300 z-50 px-6 py-6 duration-300 ${loginForm ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
@@ -17,6 +21,7 @@ export default function LoginForm({ loginForm, setLoginForm, setRegisterForm }) 
                         <input
                             id="email"
                             type="email"
+                            name='userEmail'
                             required
                             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
                         />
@@ -26,6 +31,7 @@ export default function LoginForm({ loginForm, setLoginForm, setRegisterForm }) 
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                         <input
                             id="password"
+                            name='userPassword'
                             type="password"
                             required
                             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
@@ -58,6 +64,57 @@ export default function LoginForm({ loginForm, setLoginForm, setRegisterForm }) 
 }
 
 export function RegisterForm({ registerForm, setRegisterForm, setLoginForm }) {
+
+    const [userName, setUserName] = useState('')
+    const [userEmail, setUserEmail] = useState('')
+    const [userPassword, setUserPassword] = useState('')
+    const [otpStatus, setOtpStatus] = useState(false)
+    const [otpValue, setOtpValue] = useState(false)
+
+
+    let apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
+
+    let userRegister = (event) => {
+        event.preventDefault();
+        let userObj = {
+            userName,
+            userEmail,
+            userPassword,
+            otpValue
+        }
+
+        if (otpStatus) {
+            //otp verify work
+            axios.post(`${apiBaseUrl}/user/otp-check`, userObj)
+                .then((res) => res.data)
+                .then((finalRes) => {
+                    console.log(finalRes)
+                })
+        }
+        else {
+            axios.post(`${apiBaseUrl}/user/register`, userObj)
+                .then((res) => res.data)
+                .then((finalRes) => {
+                    if (finalRes.status == 1) {
+                        setOtpStatus(true)
+                        Swal.fire({
+                            title: 'OTP Sent',
+                            msg: 'Check your mail id to verify',
+                            icon: 'success'
+                        })
+                    }
+                    else {
+                        Swal.fire({
+                            title: 'Something went wrong',
+                            msg: 'try again later',
+                            icon: 'warning'
+                        })
+                    }
+                })
+        }
+    }
+
+
     return (
         registerForm && (
             <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[450px] w-[95%] bg-white rounded-2xl shadow-xl border border-amber-300 z-50 px-7 py-6 duration-300 ${registerForm ? 'opacity-100' : 'opacity-0'}`}>
@@ -66,10 +123,12 @@ export function RegisterForm({ registerForm, setRegisterForm, setLoginForm }) {
                     <button onClick={() => setRegisterForm(false)} className='text-2xl cursor-pointer text-gray-600 hover:text-amber-500 transition'><IoMdClose /></button>
                 </div>
 
-                <form className="space-y-4">
+                <form onSubmit={userRegister} className="space-y-4">
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
                         <input
+                            onChange={(e) => setUserName(e.target.value)}
+                            name='userName'
                             id="name"
                             type="text"
                             required
@@ -80,6 +139,8 @@ export function RegisterForm({ registerForm, setRegisterForm, setLoginForm }) {
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                         <input
+                            onChange={(e) => setUserEmail(e.target.value)}
+                            name='userEmail'
                             id="email"
                             type="email"
                             required
@@ -90,6 +151,8 @@ export function RegisterForm({ registerForm, setRegisterForm, setLoginForm }) {
                     <div>
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                         <input
+                            onChange={(e) => setUserPassword(e.target.value)}
+                            name='userPassword'
                             id="password"
                             type="password"
                             required
@@ -100,6 +163,7 @@ export function RegisterForm({ registerForm, setRegisterForm, setLoginForm }) {
                     <div>
                         <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirm Password</label>
                         <input
+                            name='confirmPassword'
                             id="confirmPassword"
                             type="password"
                             required
@@ -107,12 +171,31 @@ export function RegisterForm({ registerForm, setRegisterForm, setLoginForm }) {
                         />
                     </div>
 
+                    {otpStatus &&
+                        <div>
+                            <label htmlFor="otpValue" className="block text-sm font-medium text-gray-700">OTP</label>
+                            <input
+                                onChange={(e) => setOtpValue(e.target.value)}
+                                name='otpValue'
+                                id="otpValue"
+                                type="text"
+                                required
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
+                            />
+                        </div>
+                    }
+
+
+
                     <button
+                        disabled={otpStatus}
                         type="submit"
-                        className="w-full py-2 px-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-md transition"
+                        className="w-full cursor-pointer py-2 px-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-md transition"
                     >
-                        Create Account
+                        {otpStatus ? 'VERIFY OTP' : 'GET OTP'}
                     </button>
+
+
                 </form>
 
                 <p className="text-center text-sm text-gray-600 mt-4">
