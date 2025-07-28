@@ -225,7 +225,7 @@ function Art({ allCourse }) {
                                     )
                                 })}
                             </ul>
-                            <button className='w-[100%] hover:bg-amber-500 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button>
+                            <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-amber-500 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
                         </div>
                     </div>
                 )
@@ -252,7 +252,7 @@ function Design({ allCourse }) {
                                     )
                                 })}
                             </ul>
-                            <button className='w-[100%] hover:bg-amber-500 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button>
+                            <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-amber-500 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
                         </div>
                     </div>
                 )
@@ -279,7 +279,7 @@ function Business({ allCourse }) {
                                     )
                                 })}
                             </ul>
-                            <button className='w-[100%] hover:bg-amber-500 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button>
+                            <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-amber-500 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
                         </div>
                     </div>
                 )

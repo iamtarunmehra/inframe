@@ -70,7 +70,7 @@ export default function Header() {
                                                     })}
 
                                                 </ul>
-                                                <button className='px-3 hover:bg-amber-500 lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer my-[10px] bg-amber-400'>Explore Now <FaLongArrowAltRight /></button>
+                                                <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='px-3 hover:bg-amber-500 lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer my-[10px] bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
                                             </div>
                                         </div>
                                     )
@@ -100,7 +100,7 @@ export default function Header() {
                                                     })}
 
                                                 </ul>
-                                                <button className='px-3 my-[10px] hover:bg-amber-500 lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button>
+                                                <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='px-3 my-[10px] hover:bg-amber-500 lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
                                             </div>
                                         </div>
                                     )
@@ -130,7 +130,7 @@ export default function Header() {
                                                     })}
 
                                                 </ul>
-                                                <button className='px-3 hover:bg-amber-500 lg:mt-3 flex justify-center items-center gap-2 py-[5px] my-[10px] rounded-[5px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button>
+                                                <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='px-3 hover:bg-amber-500 lg:mt-3 flex justify-center items-center gap-2 py-[5px] my-[10px] rounded-[5px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
                                             </div>
                                         </div>
                                     )
