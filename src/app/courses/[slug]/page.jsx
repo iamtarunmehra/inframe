@@ -42,7 +42,7 @@ export default function Page() {
             price: '14,250',
             aboutCourse: 'Welcome to our specially crafted WordPress course, tailored for individuals seeking to master website o learn web design during their spare time, enhancing their skillset. Workers in search of an additional stream of income by venturing into the exciting world of web designing and development.'
         },
-        'jwellery-design': {
+        'jwellery-design-course': {
             description: 'where you learn',
             price: '11,305',
             aboutCourse: 'Welcome to our specially crafted WordPress course, tailored for individuals seeking to master website o learn web design during their spare time, enhancing their skillset. Workers in search of an additional stream of income by venturing into the exciting world of web designing and development.'
