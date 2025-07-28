@@ -8,21 +8,21 @@ export default function Schedule() {
                 <form action="">
                     <div className='my-[15px]'>
                         <p className='text-gray-800'>Name*</p>
-                        <input placeholder='Enter Your Name' required className='w-[100%] px-[10px] py-[7px] border-[1px]  border-gray-400 rounded' type="text" />
+                        <input placeholder='Enter Your Name' required className='w-[100%] px-[10px] py-[10px] border-[1px]  border-gray-300 rounded' type="text" />
                     </div>
                     <div className='my-[15px]'>
                         <p className='text-gray-800'>Phone Number*</p>
-                        <input placeholder='Enter Your Name' required className='w-[100%] px-[10px] py-[7px] border-[1px]  border-gray-400 rounded' type="text" />
+                        <input placeholder='Enter Your Name' required className='w-[100%] px-[10px] py-[10px] border-[1px]  border-gray-300 rounded' type="text" />
                     </div>
                     <div className='my-[15px]'>
                         <p className='text-gray-800'>Email*</p>
-                        <input placeholder='Enter Your Name' required className='w-[100%] px-[10px] py-[7px] border-[1px]  border-gray-400 rounded' type="text" />
+                        <input placeholder='Enter Your Name' required className='w-[100%] px-[10px] py-[10px] border-[1px]  border-gray-300 rounded' type="text" />
                     </div>
                     <div className='my-[15px]'>
                         <p className='text-gray-800'>City*</p>
-                        <input placeholder='Enter Your Name' required className='w-[100%] px-[10px] py-[7px] border-[1px]  border-gray-400 rounded' type="text" />
+                        <input placeholder='Enter Your Name' required className='w-[100%] px-[10px] py-[10px] border-[1px]  border-gray-300 rounded' type="text" />
                     </div>
-                    <select className='w-[100%] py-[9px] my-[10px] cursor-pointer border-[1px] border-gray-400 rounded text-gray-700' name="" id="">
+                    <select className='w-[100%] py-[12px] px-[5px] my-[10px] cursor-pointer border-[1px] border-gray-300 rounded  text-gray-700' name="" id="">
                         <option value="">Choose a course</option>
                         <option value="">Interior design</option>
                         <option value="">Fashion design</option>
