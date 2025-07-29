@@ -426,9 +426,10 @@ export default function Header() {
 
             <div
                 className={`${mobileMenuOpen ? "left-0 opacity-[1]" : "-left-[100%] opacity-0"
-                    } duration-300 fixed top-0 w-[100%] h-[100vh] ${loginForm ? 'bg-black' : 'bg-black/95'} `}
-            >
+                    } duration-300 fixed top-0 w-[100%] h-[100vh] bg-black/95 `}>
                 <div className="flex justify-between px-5 py-5">
+                    {(loginForm || registerForm) && <div className="w-[100%] h-[100vh] absolute top-0 left-0 bg-black/90"></div>}
+
                     <img
                         className="w-[180px]"
                         src="https://www.inframeschool.com/_next/image?url=%2Fpixelcut-export-negate.png&w=384&q=75"
