@@ -6,7 +6,7 @@ export default function Footer() {
     return (
         <footer
             style={{
-                background: 'linear-gradient(344deg,rgba(247, 255, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)'
+                background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)'
             }}
             className="w-full py-[50px] "
         >

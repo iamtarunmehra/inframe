@@ -239,7 +239,7 @@ export default function Header() {
             )}
 
             {/* header for pc */}
-            <div className="lg:block overflow-x-hidden hidden w-[100%] px-0 relative py-[15px] bg-black">
+            <div className="lg:block overflow-x-hidden hidden w-[100%] px-0 relative py-[15px] bg-black/95">
                 <div className="max-w-7xl mx-auto flex justify-between items-center">
                     <div className="flex items-center gap-[20px]">
                         <img
@@ -303,11 +303,11 @@ export default function Header() {
 
                 {/* apply now form for pc */}
                 <div
-                    style={{ background: 'linear-gradient(154deg,rgba(247, 255, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
+                    style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
                     className={`${applyNow
-                        ? "top-1/2 opacity-100 block scale-100"
-                        : "top-1/3 opacity-0 hidden scale-90"
-                        } fixed left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md p-6 z-50 rounded-3xl shadow-[0_10px_25px_rgba(0,0,0,0.15)] transition-all duration-500 ease-in-out`}
+                        ? "top-[110px] right-[2%] "
+                        : "top-[-100%] left-[100%] "
+                        } fixed  w-[90%] max-w-md p-6 z-50 rounded-3xl shadow-[0_10px_25px_rgba(0,0,0,0.15)]  transition-all duration-500 ease-in-out`}
                 >
                     {/* Header */}
                     <div className="relative mb-6">
@@ -384,7 +384,7 @@ export default function Header() {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full bg-white hover:bg-amber-400 text-black hover:text-white font-semibold py-3 rounded-lg transition"
+                            className="w-full bg-white hover:text-amber-500 text-black  font-semibold py-3 rounded-lg transition"
                         >
                             Apply Now
                         </button>

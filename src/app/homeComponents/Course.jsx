@@ -158,7 +158,7 @@ export default function Course() {
                 <div className='md:block hidden w-[100%] h-[3px] bg-amber-300 absolute top-[50%] translate-y-[-50%]'></div>
                 {tabs.map((item, index) => {
                     return (
-                        <button key={index} onClick={() => setActiveTab(item.name)} className={`${activeTab === item.name ? 'bg-amber-300 text-gray-800 ' : 'bg-white hover:bg-amber-200'} w-[150px] z-20 text-amber-500  hover:text-gray-800  duration-300 lg:text-[18px] px-2 font-semibold uppercase cursor-pointer lg:py-[10px] py-[7px] border-[1px] mb-2 rounded`}>{item.name}</button>
+                        <button key={index} onClick={() => setActiveTab(item.name)} className={`${activeTab === item.name ? 'bg-amber-300 text-gray-800 ' : 'bg-white hover:bg-amber-50'} w-[150px] z-20 text-amber-500  hover:text-gray-800  duration-300 lg:text-[18px] px-2 font-semibold uppercase cursor-pointer lg:py-[10px] py-[7px] border-[1px] mb-2 rounded`}>{item.name}</button>
                     )
                 })}
             </div>
