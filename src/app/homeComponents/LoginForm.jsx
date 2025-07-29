@@ -57,6 +57,7 @@ export default function LoginForm({ loginForm, setLoginForm, setRegisterForm }) 
             })
     }
 
+    //redirecting on thank you page
     useEffect(() => {
         if (isLogin) {
             redirect('/thank-you')
@@ -104,14 +105,14 @@ export default function LoginForm({ loginForm, setLoginForm, setRegisterForm }) 
                     </button>
                 </form>
 
-                <p className="text-center text-sm text-gray-600 mt-4">
+                <p className="text-center text-sm text-gray-950 mt-4">
                     Don't have an account?{' '}
                     <span
                         onClick={() => {
                             setLoginForm(false)
                             setRegisterForm(true)
                         }}
-                        className="text-amber-600 font-medium cursor-pointer hover:underline"
+                        className="text-black font-medium cursor-pointer hover:underline"
                     >
                         Sign Up
                     </span>
@@ -299,26 +300,23 @@ export function RegisterForm({ registerForm, setRegisterForm, setLoginForm }) {
                         </div>
                     }
 
-
-
                     <button
                         type="submit"
                         className="w-full cursor-pointer py-2 px-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-md transition"
                     >
                         {otpStatus ? 'VERIFY OTP' : 'GET OTP'}
                     </button>
-
-
                 </form>
 
-                <p className="text-center text-sm text-gray-600 mt-4">
+
+                <p className="text-center text-sm text-gray-950 mt-4">
                     Already have an account?{' '}
                     <span
                         onClick={() => {
                             setRegisterForm(false)
                             setLoginForm(true)
                         }}
-                        className="text-amber-600 font-medium cursor-pointer hover:underline"
+                        className="text-black font-medium cursor-pointer hover:underline"
                     >
                         Login
                     </span>

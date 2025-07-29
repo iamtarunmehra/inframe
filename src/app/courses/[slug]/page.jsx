@@ -178,7 +178,7 @@ export default function Page() {
                     </div>
 
                     {/* right section */}
-                    <div className='bg-white shadow-md  rounded-[15px] lg:p-5 p-3'>
+                    <div className='bg-white shadow-md py-10 rounded-[15px] lg:p-5 p-3'>
                         <button className="mb-4 px-5 py-2 bg-yellow-100 text-amber-600 border border-yellow-400 rounded-full text-sm font-medium">
                             Limited Period Only
                         </button><br />

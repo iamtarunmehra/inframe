@@ -31,13 +31,15 @@ export default function Header() {
 
     return (
         <header className="sticky top-0 z-50">
+
+
             {/* mega menu functionality*/}
             {/* menu page */}
             <div
                 className={`${megaMenuOpen
                     ? "visible opacity-[1] top-[100%]"
                     : "invisible opacity-0 top-[-100%]"
-                    } duration-300 w-[100%] lg:h-[100vh] h-[100vh] overflow-y-scroll rounded-md absolute left-0 bg-white z-50 p-3`}
+                    } duration-300 w-[100%] bg-[linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)] lg:h-[100vh] h-[100vh] overflow-y-scroll rounded-md absolute left-0 bg-white z-50 p-3`}
             >
                 <div className="max-w-7xl mx-auto my-[10px]">
                     <div className="relative w-full my-[10px]">
@@ -424,7 +426,7 @@ export default function Header() {
 
             <div
                 className={`${mobileMenuOpen ? "left-0 opacity-[1]" : "-left-[100%] opacity-0"
-                    } duration-300 fixed top-0 w-[100%] h-[100vh] bg-black/95`}
+                    } duration-300 fixed top-0 w-[100%] h-[100vh] ${loginForm ? 'bg-black' : 'bg-black/95'} `}
             >
                 <div className="flex justify-between px-5 py-5">
                     <img
@@ -473,6 +475,14 @@ export default function Header() {
                             className="text-white mb-[30px] text-[23px] uppercase font-semibold"
                         >
                             Contact us
+                        </li>
+                    </Link>
+                    <Link href={"/"}>
+                        <li
+                            onClick={() => setLoginForm(true)}
+                            className="text-white mb-[30px] text-[23px] uppercase font-semibold"
+                        >
+                            Login
                         </li>
                     </Link>
                     <Link href={"/"}>
