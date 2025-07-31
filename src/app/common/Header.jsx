@@ -1,22 +1,42 @@
 "use client";
 import Link from "next/link";
-import { IoMdSearch } from "react-icons/io";
+import { IoMdLock, IoMdSearch } from "react-icons/io";
 import React, { useState } from "react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
-import { FaChevronDown } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { FaAngleDown, FaChevronDown, FaUser } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import LoginForm, { RegisterForm } from "../homeComponents/LoginForm";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
+import { LuLogOut } from "react-icons/lu";
+import Swal from "sweetalert2";
+import { logoutUser } from "../slice/loginSlice";
+import { useRouter } from "next/navigation";
+import { FaEdit } from "react-icons/fa";
+import axios from "axios";
+
 
 export default function Header() {
+    let apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
+
+    let dispatch = useDispatch()
+    let router = useRouter()
+    let [activeUserTab, setActiveUserTab] = useState('')
+    const [currentPassword, setCurrentPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [currentTabEdit, setCurrentTabEdit] = useState('')
     const [loginForm, setLoginForm] = useState(false);
-    const [registerForm, setRegisterForm] = useState(false);
-    let [megaMenuOpen, setMegaMenuOpen] = useState(false);
+    const [registerForm, setRegisterForm] = useState(false)
+    const [megaMenuOpen, setMegaMenuOpen] = useState(false);
     const [activeTab, setActiveTab] = useState("all");
-    let [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    let [applyNow, setApplyNow] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [applyNow, setApplyNow] = useState(false);
+    const [editModel, setEditModel] = useState(false)
+    const token = useSelector((store) => store.loginStore.token)
+    let userEmail = useSelector((store) => store.loginStore.user?.userEmail) ?? ''
+    let userName = userEmail.split('@')[0]
     let tabs = [
         { name: "all" },
         { name: "art" },
@@ -29,6 +49,89 @@ export default function Header() {
     let businessData = courseData.filter((item) => item.category === "business");
     let artData = courseData.filter((item) => item.category === "art");
 
+    const logout = () => {
+        Swal.fire({
+            title: 'Do you really want to logout ?',
+            icon: 'warning',
+            showConfirmButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel',
+            showCancelButton: true,
+            iconColor: '#332A2A',
+            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
+            confirmButtonColor: '#332A2A',
+        }).then((res) => {
+            if (res.isConfirmed) {
+                dispatch(logoutUser())
+                Swal.fire({
+                    title: 'Logout Successfully',
+                    showConfirmButton: false,
+                    icon: 'success',
+                    iconColor: '#332A2A',
+                    background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
+                    confirmButtonColor: '#332A2A',
+                    timer: 1000,
+                }).then((res) => {
+                    window.location.href = '/';
+                })
+            }
+        })
+    }
+
+    const changePassword = (event) => {
+        event.preventDefault();
+        let obj = {
+            currentPassword, newPassword
+        }
+        if (newPassword == confirmPassword) {
+            axios.post(`${apiBaseUrl}/user/change-password`, obj, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then((res) => res.data)
+                .then((finalRes) => {
+                    if (finalRes.status == 1) {
+                        Swal.fire({
+                            title: 'Passwrod changed successfully',
+                            text: 'password has been changed',
+                            icon: 'success',
+                            iconColor: '#332A2A',
+                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
+                            confirmButtonColor: '#332A2A',
+                            timer: 2000,
+                        }).then((res) => {
+                            window.location.reload();
+                        })
+                    }
+                    else {
+                        Swal.fire({
+                            title: 'Invalid Passwrod',
+                            text: 'you have entered Invalid Password',
+                            icon: 'warning',
+                            iconColor: '#332A2A',
+                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
+                            confirmButtonColor: '#332A2A',
+                            timer: 2000,
+                        })
+                    }
+                })
+        }
+        else {
+            Swal.fire({
+                title: 'Password not Matched',
+                text: 'New password and Confirm password must be the same',
+                icon: 'error',
+                iconColor: '#332A2A',
+                background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
+                confirmButtonColor: '#332A2A',
+                timer: 2000,
+            })
+        }
+    }
+
+
+
     return (
         <header className="sticky top-0 z-50">
 
@@ -36,19 +139,20 @@ export default function Header() {
             {/* mega menu functionality*/}
             {/* menu page */}
             <div
+                style={{ background: 'linear-gradient(184deg,rgba(255, 238, 107, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 238, 107, 1) 100%)' }}
                 className={`${megaMenuOpen
                     ? "visible opacity-[1] top-[100%]"
                     : "invisible opacity-0 top-[-100%]"
-                    } duration-300 w-[100%] bg-[linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)] lg:h-[100vh] h-[100vh] overflow-y-scroll rounded-md absolute left-0 bg-white z-50 p-3`}
+                    } duration-300 w-[100%] bg-[linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)] lg:h-[100vh] h-[100vh] overflow-y-scroll rounded-md absolute left-0 z-50 p-3`}
             >
                 <div className="max-w-7xl mx-auto my-[10px]">
                     <div className="relative w-full my-[10px]">
-                        <IoMdSearch className="absolute left-3 mb-2 top-1/2 -translate-y-1/2 text-gray-500 text-xl" />
+                        <IoMdSearch className="absolute left-3 mb-2 top-[22px] -translate-y-1/2 text-gray-500 text-xl" />
                         <input
                             required
                             type="text"
                             placeholder="Search Courses...."
-                            className="w-full focus:outline-gray-400 border-gray-300 pl-10 p-[5px]r-[10px] py-[5px] border-2 rounded"
+                            className="w-full focus:outline-gray-900 border-[1] border-gray-800  pl-10 p-[5px]r-[10px] py-[10px] mb-3 rounded"
                         />
                     </div>
 
@@ -61,7 +165,7 @@ export default function Header() {
                                     className={`${activeTab === item.name
                                         ? "bg-gray-800 text-white"
                                         : "bg-white hover:bg-gray-200 hover:text-gray-900"
-                                        } z-20 text-gray-900  duration-100 lg:text-[16px] px-3 capitalize cursor-pointer py-[5px] rounded mt-3 border-[1px] border-gray-300 mb-5 ro-[5px]unded`}
+                                        } z-20 text-gray-900  duration-100 lg:text-[16px] px-3 capitalize cursor-pointer py-[5px] rounded mt- mb-5 ro-[5px]unded`}
                                 >
                                     {item.name}
                                 </button>
@@ -76,7 +180,7 @@ export default function Header() {
                                 : "hidden"
                                 }`}
                         >
-                            <h2 className="uppercase font-semibold lg:text-[18px] text-[22px] text-gray-800 ">
+                            <h2 className="uppercase rounded-[5px] py-[10px] ps-2 font-semibold lg:text-[30px] text-[22px] text-gray-800 ">
                                 Design
                             </h2>
                             {designData.length >= 1
@@ -84,8 +188,9 @@ export default function Header() {
                                     let { points } = item;
                                     return (
                                         <div
+                                            style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
                                             key={index}
-                                            className="w-[100%] p-3 lg:my-[15px] my-5 grid lg:grid-cols-[35%_auto] grid-cols-1 border-2 rounded-[10px] border-gray-300 gap-5"
+                                            className="w-[100%]  rounded-[15px]  p-3 lg:mb-[30px] my-5 grid lg:grid-cols-[35%_auto] grid- gap-5"
                                         >
                                             <img
                                                 className="lg:w-[130px] w-[100%] rounded-[10px] h-[130px] object-cover"
@@ -93,7 +198,7 @@ export default function Header() {
                                                 alt=""
                                             />
                                             <div>
-                                                <h3 className="text-gray-900 text-[18px]">
+                                                <h3 className="text-gray-900  text-[18px]">
                                                     {item.name}
                                                 </h3>
                                                 <ul>
@@ -113,7 +218,7 @@ export default function Header() {
                                                         .toLowerCase()
                                                         .replace(/[\s\/]+/g, "-")}`}
                                                 >
-                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 hover:bg-amber-400 lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer my-[10px] bg-amber-300">
+                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-white hover:bg-amber-500">
                                                         Explore Now <FaLongArrowAltRight />
                                                     </button>
                                                 </Link>
@@ -131,16 +236,16 @@ export default function Header() {
                                 : "hidden"
                                 }`}
                         >
-                            <h2 className="uppercase font-semibold lg:text-[18px] text-[22px] text-gray-800 ">
-                                Business
+                            <h2 className="uppercase rounded-[5px] py-[10px] ps-2 font-semibold lg:text-[30px] text-[22px] text-gray-800 ">Business
                             </h2>
                             {businessData.length >= 1
                                 ? businessData.map((item, index) => {
                                     let { points } = item;
                                     return (
                                         <div
+                                            style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
                                             key={index}
-                                            className="w-[100%] p-3 lg:my-[15px] my-5 grid lg:grid-cols-[35%_auto] grid-cols-1 border-2 rounded-[10px] border-gray-300 gap-5"
+                                            className="w-[100%]  rounded-[15px]  p-3 lg:mb-[30px] my-5 grid lg:grid-cols-[35%_auto] grid- gap-5"
                                         >
                                             <img
                                                 className="lg:w-[130px] w-[100%] rounded-[10px] h-[130px] object-cover"
@@ -168,7 +273,7 @@ export default function Header() {
                                                         .toLowerCase()
                                                         .replace(/[\s\/]+/g, "-")}`}
                                                 >
-                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] hover:bg-amber-400 lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-amber-300">
+                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-white hover:bg-amber-500">
                                                         Explore Now <FaLongArrowAltRight />
                                                     </button>
                                                 </Link>
@@ -184,16 +289,16 @@ export default function Header() {
                             className={`${activeTab === "all" || activeTab === "art" ? "block" : "hidden"
                                 }`}
                         >
-                            <h2 className="uppercase font-semibold lg:text-[18px] text-[22px] text-gray-800 ">
-                                Art
+                            <h2 className="uppercase rounded-[5px] py-[10px] ps-2 font-semibold lg:text-[30px] text-[22px] text-gray-800 ">                                Art
                             </h2>
                             {artData.length >= 1
                                 ? artData.map((item, index) => {
                                     let { points } = item;
                                     return (
                                         <div
+                                            style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
                                             key={index}
-                                            className="w-[100%] p-3 lg:my-[15px] my-5 grid lg:grid-cols-[35%_auto] grid-cols-1 border-2 rounded-[10px] border-gray-300 gap-5"
+                                            className="w-[100%]  rounded-[15px]  p-3 lg:mb-[30px] my-5 grid lg:grid-cols-[35%_auto] grid- gap-5"
                                         >
                                             <img
                                                 className="lg:w-[130px] w-[100%] rounded-[10px] h-[130px] object-cover"
@@ -221,7 +326,7 @@ export default function Header() {
                                                         .toLowerCase()
                                                         .replace(/[\s\/]+/g, "-")}`}
                                                 >
-                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 hover:bg-amber-400 lg:mt-3 flex justify-center items-center gap-2 py-[5px] my-[10px] rounded-[5px] duration-300 cursor-pointer bg-amber-300">
+                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-white hover:bg-amber-500">
                                                         Explore Now <FaLongArrowAltRight />
                                                     </button>
                                                 </Link>
@@ -236,12 +341,12 @@ export default function Header() {
             </div>
 
             {/* overlay when menu open*/}
-            {(megaMenuOpen || applyNow || loginForm || registerForm || applyNow) && (
+            {(megaMenuOpen || currentTabEdit || editModel || applyNow || loginForm || registerForm || applyNow) && (
                 <div className="fixed top-0 left-0 z-[-10] w-[100%] h-[100vh] bg-[rgba(0,0,0,0.9)]"></div>
             )}
 
             {/* header for pc */}
-            <div className="lg:block overflow-x-hidden hidden w-[100%] px-0 relative py-[15px] bg-black/95">
+            <div className="lg:block hidden w-[100%] px-0 relative py-[15px] bg-black/95">
                 <div className="max-w-7xl mx-auto flex justify-between items-center">
                     <div className="flex items-center gap-[20px]">
                         <img
@@ -252,8 +357,8 @@ export default function Header() {
                         <div className="flex gap-[25px] items-center ">
                             <button
                                 onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-                                className={`px-[15px] cursor-pointer flex items-center gap-[4px] font-bold rounded-md py-[5px] ${megaMenuOpen ? "bg-amber-300" : "bg-white"
-                                    } group hover:bg-amber-300 duration-200`}
+                                className={`px-[15px] cursor-pointer flex items-center gap-[4px] font-bold rounded-md py-[7px] ${megaMenuOpen ? " bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400" : "bg-amber-300"
+                                    } group hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 duration-300 transition-all ease-in-out`}
                             >
                                 Study
                                 <FaChevronDown
@@ -278,30 +383,91 @@ export default function Header() {
                             className="lg:w-[350px] w-[200px] outline-none rounded-l-md border-l-[1px] border-t-[1px] border-b-[1px] text-white py-[8px] border-white px-2"
                         />
                         <button
+                            style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
                             type="submit"
-                            className="py-[10px] px-[10px] cursor-pointer rounded-r-md bg-amber-300 text-[22px]"
+                            className="py-[10px] px-[10px] cursor-pointer rounded-r-md text-[22px]"
                         >
                             <IoMdSearch />
                         </button>
                     </form>
-                    <div>
-                        <button className="text-white text-[18px]  border-[1px] border-transparent hover:border-white duration-300 px-3 py-[3px] cursor-pointer">
+                    <div className="flex gap-5">
+                        <button className="text-white text-[18px] hover:text-gray-300 duration-300 px-3 py-[3px] cursor-pointer">
                             Contact Us
                         </button>
                         <button
+                            style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
                             onClick={() => setApplyNow(true)}
-                            className="px-[20px] rounded-md py-[7px] bg-amber-300 ml-5 font-bold cursor-pointer"
+                            className="px-[20px] font-semibold text-gray-900 rounded-md py-[7px] duration-500 ml-0  cursor-pointer"
                         >
                             Apply Now
                         </button>
-                        <button
-                            onClick={() => setLoginForm(true)}
-                            className="px-[20px] rounded-md py-[7px] duration-500 border-[2px] text-amber-300 border-amber-300 ml-5 font-bold hover:bg-amber-300 hover:text-gray-900 cursor-pointer"
-                        >
-                            Login
-                        </button>
+
+                        {token ?
+                            <button
+                                className="px-[10px] z-40 rounded-md py-[7px] duration-500 border-[2px] text-amber-300 border-amber-300 ml-0 font-bold hover:bg-amber-300 hover:text-gray-900 relative group cursor-pointer flex items-center gap-1 "
+                            >
+                                My Account <FaAngleDown />
+
+                                <div className="absolute invisible opacity-[0] group-hover:visible group-hover:opacity-[1] shadow-md duration-300 rounded-[5px] top-[125%] z-[100] left-[0px] w-[250px] h-[auto] bg-white  border-2 border-amber-300 shadow-amber-300">
+                                    <ul className="bg-gray-100 ">
+                                        <li className="text-start cursor-default py-[15px] px-[10px] bg-gray-50 text-gray-900 flex items-center gap-2">
+                                            <div className="flex  items-center gap-1"><FaUser /> {userName}</div>
+                                        </li>
+                                        <li onClick={() => setEditModel(true)} className="text-start hover:bg-gray-100 py-[15px] px-[10px] bg-gray-50 text-gray-900 flex items-center gap-1"><FaEdit /> Edit
+                                        </li>
+                                        <li onClick={logout} className="text-start hover:bg-gray-100 py-[15px] px-[10px] bg-gray-50 text-gray-900 flex items-center gap-1"><LuLogOut /> Logout</li>
+                                    </ul>
+                                </div>
+                            </button>
+                            :
+                            <button
+                                onClick={() => setLoginForm(true)}
+                                className="px-[20px] rounded-md py-[7px] duration-500 border-[2px] text-amber-300 border-amber-300 hover:border-amber-400 hover:text-gray-900 ml-0 font-bold hover:bg-amber-400  cursor-pointer"
+                            >
+                                Login
+
+
+                            </button>
+                        }
+
+
                     </div>
                 </div>
+                {/* model for edit something of user */}
+                {editModel && <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-[400px] rounded-[10px] h-[220px] ">
+                    <h4 className=" flex justify-between px-3 py-5 text-gray-800 font-semibold text-[25px]">What you want to change
+                        <span onClick={() => setEditModel(false)} className="text-[28px] cursor-pointer hover:text-gray-900 duration-300">&times;</span>
+                    </h4>
+                    <div className="flex flex-col gap-5 justify-center px-5">
+                        <button onClick={() => setCurrentTabEdit('changeUsername')} className="bg-gray-300 cursor-pointer hover:bg-blue-500 hover:text-white py-[10px] duration-300 rounded-[10px]">Change Username</button>
+                        <button onClick={() => setCurrentTabEdit('changePassword')} className="bg-gray-300 cursor-pointer hover:bg-red-500 hover:text-white py-[10px] duration-300 rounded-[10px]">Change Password</button>
+                    </div>
+                </div>}
+
+                {currentTabEdit === 'changePassword' &&
+                    <form style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} onSubmit={changePassword} className="fixed top-1/2 h-[auto] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[400px] rounded-[10px] py-[30px] px-5 ">
+                        <h4 className=" flex justify-between py-0 text-gray-800 font-semibold text-[25px]">Change Password
+                            <span onClick={() => {
+                                setCurrentTabEdit(false)
+                                setEditModel(false)
+                            }} className="text-[28px] cursor-pointer hover:text-gray-900 duration-300">&times;</span>
+                        </h4>
+                        <p className="text-gray-800">Your password must be atleast 6 character</p>
+                        <div className="my-[10px]">
+                            <p className="text-[14px]">Current Password</p>
+                            <input onChange={(e) => setCurrentPassword(e.target.value)} type="text" className="w-[100%] px-[5px] py-[7px] border-[1px] rounded-[5px] border-gray-500" />
+                        </div>
+                        <div className="my-[10px]">
+                            <p className="text-[14px]">New Password</p>
+                            <input onChange={(e) => setNewPassword(e.target.value)} type="text" className="w-[100%] px-[5px] py-[7px] border-[1px] rounded-[5px] border-gray-500" />
+                        </div>
+                        <div className="my-[10px]">
+                            <p className="text-[14px]">Retype new password</p>
+                            <input onChange={(e) => setConfirmPassword(e.target.value)} name="confirmPassword" type="text" className="w-[100%] px-[5px] py-[7px] border-[1px] rounded-[5px] border-gray-500" />
+                        </div>
+                        <button type="submit" className="my-[10px] rounded-[15px] text-white cursor-pointer text-center bg-blue-400 w-[100%] py-[8px]">Change Password</button>
+                    </form>
+                }
 
                 {/* apply now form for pc */}
                 <div
@@ -390,6 +556,7 @@ export default function Header() {
                         >
                             Apply Now
                         </button>
+
                     </form>
                 </div>
             </div>
@@ -478,14 +645,26 @@ export default function Header() {
                             Contact us
                         </li>
                     </Link>
-                    <Link href={"/"}>
-                        <li
-                            onClick={() => setLoginForm(true)}
-                            className="text-white mb-[30px] text-[23px] uppercase font-semibold"
-                        >
-                            Login
-                        </li>
-                    </Link>
+                    {token ?
+                        <Link href={"/"}>
+                            <li
+                                onClick={() => setLoginForm(true)}
+                                className="text-white mb-[30px] text-[23px] uppercase font-semibold"
+                            >
+                                My Account
+                            </li>
+                        </Link>
+                        :
+                        <Link href={"/"}>
+                            <li
+                                onClick={() => setLoginForm(true)}
+                                className="text-white mb-[30px] text-[23px] uppercase font-semibold"
+                            >
+                                Login
+                            </li>
+                        </Link>
+                    }
+
                     <Link href={"/"}>
                         <li
                             onClick={() => setApplyNow(true)}
@@ -594,20 +773,27 @@ export default function Header() {
                 </form>
             </div>
 
-            {/* loginForm open and close */}
-            <LoginForm
-                setLoginForm={setLoginForm}
-                loginForm={loginForm}
-                setRegisterForm={setRegisterForm}
-            />
 
-            {/* register form open and close*/}
-            <RegisterForm
-                loginForm={loginForm}
-                setLoginForm={setLoginForm}
-                setRegisterForm={setRegisterForm}
-                registerForm={registerForm}
-            />
+
+            {activeUserTab === 'login' &&
+                <LoginForm
+                    setLoginForm={setLoginForm}
+                    loginForm={loginForm}
+                    setRegisterForm={setRegisterForm}
+                />
+            }
+            {
+                activeUserTab === 'register' &&
+                <RegisterForm
+                    loginForm={loginForm}
+                    setLoginForm={setLoginForm}
+                    setRegisterForm={setRegisterForm}
+                    registerForm={registerForm}
+                />
+            }
+
+
+
         </header>
     );
 }

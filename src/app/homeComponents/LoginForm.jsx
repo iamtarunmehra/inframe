@@ -3,13 +3,17 @@ import axios from 'axios';
 import { redirect } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { IoMdClose } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import { loginData } from '../slice/loginSlice';
 
 export default function LoginForm({ loginForm, setLoginForm, setRegisterForm }) {
 
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     const [isLogin, setIsLogin] = useState(false)
+    const [forgotPassword, setForgotPassword] = useState(false)
+    let dispatch = useDispatch()
     let apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
 
     let userLogin = (event) => {
@@ -21,10 +25,15 @@ export default function LoginForm({ loginForm, setLoginForm, setRegisterForm }) 
         axios.post(`${apiBaseUrl}/user/login`, obj)
             .then((res) => res.data)
             .then((finalRes) => {
+                let finalObj = {
+                    user: obj,
+                    token: finalRes.token
+                }
                 if (finalRes.status == 2) {
+                    dispatch(loginData(finalObj))
                     setIsLogin(true)
                     Swal.fire({
-                        title: 'Login Successfully',
+                        title: 'Logout Successfully',
                         icon: 'success',
                         iconColor: '#332A2A',
                         background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
@@ -117,7 +126,29 @@ export default function LoginForm({ loginForm, setLoginForm, setRegisterForm }) 
                         Sign Up
                     </span>
                 </p>
+                <p className="text-center text-sm text-gray-950 mt-1">
+                    <span
+                        onClick={() => {
+                            setForgotPassword(true)
+                            setLoginForm(false)
+                            setRegisterForm(false)
+                        }}
+                        className="text-black font-medium cursor-pointer hover:underline"
+                    >
+                        Forgot password ?
+                    </span>
+                </p>
+
+                {forgotPassword &&
+                    <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-[400px] rounded-[10px] h-[500px] ">                        <h4 className=" flex justify-between px-3 py-5 text-gray-800 font-semibold text-[25px]">Forgot Password
+                        <span onClick={() => {
+                            setForgotPassword(false)
+                        }} className="text-[28px] cursor-pointer hover:text-gray-900 duration-300">&times;</span>
+                    </h4>
+                    </div>
+                }
             </div>
+
         )
     )
 }

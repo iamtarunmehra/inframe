@@ -8,7 +8,7 @@ export default function Footer() {
             style={{
                 background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)'
             }}
-            className="w-full py-[50px] "
+            className="w-full py-[50px]"
         >
             <div className='w-[100%] border-b-[2px] border-gray-400 pb-5'>
                 <div className='max-w-7xl mx-auto grid lg:grid-cols-[18%_40%_auto] grid-cols-1 lg:gap-15 gap-5 p-3 lg:p-0'>
