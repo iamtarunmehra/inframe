@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { FaAngleDown, FaChevronDown, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import LoginForm, { ForgotPassword, RegisterForm } from "../homeComponents/LoginForm";
+import LoginForm, { ForgotPassword, RegisterForm, ResetPassword, VerifyOtp } from "../homeComponents/LoginForm";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
@@ -220,7 +220,7 @@ export default function Header() {
                                                         .toLowerCase()
                                                         .replace(/[\s\/]+/g, "-")}`}
                                                 >
-                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-white ">
+                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] hover:bg-amber-400 hover:text-white rounded-[5px] duration-100 cursor-pointer bg-white ">
                                                         Explore Now <FaLongArrowAltRight />
                                                     </button>
                                                 </Link>
@@ -275,7 +275,7 @@ export default function Header() {
                                                         .toLowerCase()
                                                         .replace(/[\s\/]+/g, "-")}`}
                                                 >
-                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-white hover:bg-amber-500">
+                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] hover:bg-amber-400 hover:text-white rounded-[5px] duration-100 cursor-pointer bg-white ">
                                                         Explore Now <FaLongArrowAltRight />
                                                     </button>
                                                 </Link>
@@ -328,7 +328,7 @@ export default function Header() {
                                                         .toLowerCase()
                                                         .replace(/[\s\/]+/g, "-")}`}
                                                 >
-                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-white hover:bg-amber-500">
+                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] hover:bg-amber-400 hover:text-white rounded-[5px] duration-100 cursor-pointer bg-white ">
                                                         Explore Now <FaLongArrowAltRight />
                                                     </button>
                                                 </Link>
@@ -430,22 +430,19 @@ export default function Header() {
                                 className="px-[20px] rounded-md py-[7px] duration-500 border-[2px] text-amber-300 border-amber-300 hover:border-amber-400 hover:text-gray-900 ml-0 font-bold hover:bg-amber-400  cursor-pointer"
                             >
                                 Login
-
-
                             </button>
                         }
-
-
                     </div>
                 </div>
+
                 {/* model for edit something of user */}
                 {editModel && <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-[400px] rounded-[10px] h-[220px] ">
                     <h4 className=" flex justify-between px-3 py-5 text-gray-800 font-semibold text-[25px]">What you want to change
                         <span onClick={() => setEditModel(false)} className="text-[28px] cursor-pointer hover:text-gray-900 duration-300">&times;</span>
                     </h4>
                     <div className="flex flex-col gap-5 justify-center px-5">
-                        <button onClick={() => setCurrentTabEdit('changeUsername')} className="bg-gray-300 cursor-pointer hover:bg-blue-500 hover:text-white py-[10px] duration-300 rounded-[10px]">Change Username</button>
-                        <button onClick={() => setCurrentTabEdit('changePassword')} className="bg-gray-300 cursor-pointer hover:bg-red-500 hover:text-white py-[10px] duration-300 rounded-[10px]">Change Password</button>
+                        <button onClick={() => setCurrentTabEdit('changeUsername')} className="bg-white cursor-pointer hover:bg-orange-500 hover:text-white py-[10px] duration-300 rounded-[10px]">Change Username</button>
+                        <button onClick={() => setCurrentTabEdit('changePassword')} className="hover:bg-orange-500 cursor-pointer bg-white  hover:text-white py-[10px] duration-300 rounded-[10px]">Change Password</button>
                     </div>
                 </div>}
 
@@ -460,17 +457,17 @@ export default function Header() {
                         <p className="text-gray-800">Your password must be atleast 6 character</p>
                         <div className="my-[10px]">
                             <p className="text-[14px]">Current Password</p>
-                            <input onChange={(e) => setCurrentPassword(e.target.value)} type="text" className="w-[100%] px-[5px] py-[7px] border-[1px] rounded-[5px] border-gray-500" />
+                            <input required onChange={(e) => setCurrentPassword(e.target.value)} type="text" className="w-[100%] px-[5px] py-[7px] border-[1px] rounded-[10px] border-gray-500" />
                         </div>
                         <div className="my-[10px]">
                             <p className="text-[14px]">New Password</p>
-                            <input onChange={(e) => setNewPassword(e.target.value)} type="text" className="w-[100%] px-[5px] py-[7px] border-[1px] rounded-[5px] border-gray-500" />
+                            <input required onChange={(e) => setNewPassword(e.target.value)} type="text" className="w-[100%] px-[5px] py-[7px] border-[1px] rounded-[10px] border-gray-500" />
                         </div>
                         <div className="my-[10px]">
                             <p className="text-[14px]">Retype new password</p>
-                            <input onChange={(e) => setConfirmPassword(e.target.value)} name="confirmPassword" type="text" className="w-[100%] px-[5px] py-[7px] border-[1px] rounded-[5px] border-gray-500" />
+                            <input required onChange={(e) => setConfirmPassword(e.target.value)} name="confirmPassword" type="text" className="w-[100%] px-[5px] py-[7px] border-[1px] rounded-[10px] border-gray-500" />
                         </div>
-                        <button type="submit" className="my-[10px] rounded-[15px] text-white cursor-pointer text-center bg-blue-400 w-[100%] py-[8px]">Change Password</button>
+                        <button type="submit" className="my-[10px] rounded-[10px] hover:text-white cursor-pointer text-center bg-white text-gray-900 duration-300 font-semibold text-[16px] hover:bg-orange-500 w-[100%] py-[8px]">Change Password</button>
                     </form>
                 }
 
@@ -802,6 +799,9 @@ export default function Header() {
                 />
             }
 
+            {activeUserTab == 'resetPassword' &&
+                <ResetPassword />
+            }
 
 
         </header>

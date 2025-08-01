@@ -12,7 +12,7 @@ export default function ThankYouRegistration() {
 
     return (
         <div className="min-h-auto flex items-center justify-center bg-white lg:px-6 lg:py-12 mb-10">
-            <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="max-w-5xl w-full lg:rounded-xl shadow-xl lg:p-12 p-5 text-center">
+            <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="max-w-7xl lg:rounded-xl shadow-xl lg:p-12 p-5 text-center">
                 <h1 className="text-5xl font-extrabold text-gray-900 mb-8">Thank you for reaching out to us!</h1>
                 <p className="text-gray-800 text-lg mb-6 leading-relaxed">
                     We&#39;re excited to have you onboard. Your registration has been successfully completed.

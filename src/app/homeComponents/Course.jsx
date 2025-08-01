@@ -187,7 +187,7 @@ function All({ allCourse }) {
                     allCourse.map((item, index) => {
                         let { points } = item
                         return (
-                            <div key={index} className='bg-white border-2 border-amber-100 w-[100%] overflow-hidden group h-auto  lg:my-[40px] my-[15px] lg:pb-0 pb-[50px] hover:shadow-2xl shadow-amber-600 duration-500 rounded-[20px]'>
+                            <div key={index} className='bg-white hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 group w-[100%] overflow-hidden group h-auto  lg:my-[40px] my-[15px] lg:pb-0 pb-[50px] hover:shadow-2xl shadow-amber-600 duration-500 rounded-[20px]'>
                                 <img className='w-[100%] duration-300 group-hover:scale-[1.1] rounded-t-[20px] h-[40%] object-cover' src={item.src} alt="" />
                                 <div className='px-7 pt-3 h-[70%]'>
                                     <h2 className='text-gray-900 my-[10px] font-semibold text-[24px]'>{item.name}</h2>
@@ -198,7 +198,7 @@ function All({ allCourse }) {
                                             )
                                         })}
                                     </ul>
-                                    <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-amber-500 lg:mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
+                                    <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-orange-400 lg:mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400 group-hover:bg-white hover:text-white'>Explore Now <FaLongArrowAltRight /></button></Link>
                                 </div>
                             </div>
                         )
@@ -227,7 +227,7 @@ function Art({ allCourse }) {
                                     )
                                 })}
                             </ul>
-                            <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-amber-500 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
+                            <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-orange-400 lg:mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400 group-hover:bg-white hover:text-white'>Explore Now <FaLongArrowAltRight /></button></Link>
                         </div>
                     </div>
                 )
@@ -254,7 +254,7 @@ function Design({ allCourse }) {
                                     )
                                 })}
                             </ul>
-                            <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-amber-500 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
+                            <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-orange-400 lg:mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400 group-hover:bg-white hover:text-white'>Explore Now <FaLongArrowAltRight /></button></Link>
                         </div>
                     </div>
                 )
@@ -281,7 +281,7 @@ function Business({ allCourse }) {
                                     )
                                 })}
                             </ul>
-                            <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-amber-500 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400'>Explore Now <FaLongArrowAltRight /></button></Link>
+                            <Link href={`/courses/${item.name.toLowerCase().replace(/[\s\/]+/g, '-')}`}><button className='w-[100%] hover:bg-orange-400 mt-3 flex justify-center items-center gap-2 py-[7px] rounded-[10px] duration-300 cursor-pointer bg-amber-400 hover:text-white'>Explore Now <FaLongArrowAltRight /></button></Link>
                         </div>
                     </div>
                 )

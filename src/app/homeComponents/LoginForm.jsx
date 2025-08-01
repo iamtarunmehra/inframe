@@ -32,7 +32,7 @@ export default function LoginForm({ activeUserTab, setActiveUserTab }) {
                     dispatch(loginData(finalObj))
                     setIsLogin(true)
                     Swal.fire({
-                        title: 'Logout Successfully',
+                        title: 'Login Successfully',
                         icon: 'success',
                         iconColor: '#332A2A',
                         background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
@@ -139,25 +139,76 @@ export default function LoginForm({ activeUserTab, setActiveUserTab }) {
 }
 
 export function ForgotPassword({ setActiveUserTab, activeUserTab }) {
-    let token = useSelector((store) => store.loginStore)
+    const token = useSelector((store) => store.loginStore)
     console.log(token)
-    let apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
-    let [userEmail, setUserEmail] = useState('')
+    const [otpStatus, setOtpStatus] = useState(false)
+    const [otpValue, setOtpValue] = useState(false)
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
+    const [userEmail, setUserEmail] = useState('')
     let forgotPassword = (event) => {
         event.preventDefault();
-        axios.post(`${apiBaseUrl}/user/forgot-password`, { userEmail }, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((res) => res.data)
-            .then((finalRes) => {
-                console.log(finalRes)
-            })
+        if (otpStatus) {
+            let obj = { userEmail, otpValue }
+            axios.post(`${apiBaseUrl}/user/verify-otp`, obj)
+                .then((res) => res.data)
+                .then((finalRes) => {
+                    if (finalRes.status == 1) {
+                        setActiveUserTab('resetPassword')
+                        Swal.fire({
+                            title: 'OTP Verified',
+                            icon: 'success',
+                            iconColor: '#332A2A',
+                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
+                            confirmButtonColor: '#332A2A',
+                            timer: 2000,
+                        })
+                    }
+                    else {
+                        Swal.fire({
+                            title: 'OTP Is Invalid',
+                            text: 'Recheck your email to verify',
+                            icon: 'error',
+                            iconColor: '#332A2A',
+                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
+                            confirmButtonColor: '#332A2A',
+                            timer: 2000,
+                        })
+                    }
+                })
+        }
+        else {
+            axios.post(`${apiBaseUrl}/user/forgot-password`, { userEmail })
+                .then((res) => res.data)
+                .then((finalRes) => {
+                    if (finalRes.status == 1) {
+                        setOtpStatus(true)
+                        Swal.fire({
+                            title: 'OTP Sent',
+                            text: 'Check your email to verify',
+                            icon: 'success',
+                            iconColor: '#332A2A',
+                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
+                            confirmButtonColor: '#332A2A',
+                            timer: 2000,
+                        })
+                    }
+                    else {
+                        Swal.fire({
+                            title: 'Email ID Not Exist !',
+                            text: 'Check your email to verify',
+                            icon: 'warning',
+                            iconColor: '#332A2A',
+                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
+                            confirmButtonColor: '#332A2A',
+                            timer: 2000,
+                        })
+                    }
+                })
+        }
     }
 
     return (
-        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  lg:w-[400px] w-[350px] rounded-[10px]  px-3 py-5 h-[250px] ">
+        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  lg:w-[400px] w-[350px] rounded-[10px]  px-6 py-5 h-[auto] ">
             <h4 className=" flex justify-between text-gray-800 font-semibold text-[25px]">Forgot Password
                 <span onClick={() => {
                     setActiveUserTab('')
@@ -175,11 +226,71 @@ export function ForgotPassword({ setActiveUserTab, activeUserTab }) {
                         className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
                     />
                 </div>
-                <button type='submit' className='w-[100%] rounded-[10px] hover:bg-[#764d8b] bg-white shadow-2xl shadow-amber-300  hover:text-white font-semibold py-[10px] duration-300'>Send OTP</button>
+                {otpStatus &&
+                    <div className='my-[20px]'>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Enter OTP</label>
+                        <input
+                            onChange={(e) => setOtpValue(e.target.value)}
+                            name='otpValue'
+                            id="otpValue"
+                            type="text"
+                            required
+                            className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        />
+                    </div>
+                }
+                <button type='submit' className='w-[100%] rounded-[10px] hover:bg-orange-500 bg-white shadow-2xl shadow-amber-300  hover:text-white font-semibold py-[10px] duration-300'>{otpStatus ? 'Verify OTP' : 'Send OTP'}</button>
             </form>
         </div>
     )
 }
+
+export function ResetPassword() {
+    let apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
+    const [newPassword, setNewPassword] = useState('')
+
+    let resetPassword = (event) => {
+        axios.post(`${apiBaseUrl}/user/reset-password`)
+    }
+
+    return (
+        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  lg:w-[400px] w-[350px] rounded-[10px]  px-6 py-5 h-[auto] ">
+            <h4 className=" flex justify-between text-gray-800 font-semibold text-[25px]">Forgot Password
+                <span onClick={() => {
+                    setActiveUserTab('')
+                }} className="text-[28px] cursor-pointer hover:text-gray-900 duration-300">&times;</span>
+            </h4>
+            <form onSubmit={resetPassword} action="">
+                <div className='my-[20px]'>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Enter your Email ID</label>
+                    <input
+                        onChange={(e) => setUserEmail(e.target.value)}
+                        name='userEmail'
+                        id="userEmail"
+                        type="email"
+                        required
+                        className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
+                    />
+                </div>
+                {otpStatus &&
+                    <div className='my-[20px]'>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Enter OTP</label>
+                        <input
+                            onChange={(e) => setOtpValue(e.target.value)}
+                            name='otpValue'
+                            id="otpValue"
+                            type="text"
+                            required
+                            className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        />
+                    </div>
+                }
+                <button type='submit' className='w-[100%] rounded-[10px] hover:bg-orange-500 bg-white shadow-2xl shadow-amber-300  hover:text-white font-semibold py-[10px] duration-300'>{otpStatus ? 'Verify OTP' : 'Send OTP'}</button>
+            </form>
+        </div>
+    )
+}
+
 
 export function RegisterForm({ activeUserTab, setActiveUserTab }) {
 
@@ -190,8 +301,6 @@ export function RegisterForm({ activeUserTab, setActiveUserTab }) {
     const [otpStatus, setOtpStatus] = useState(false)
     const [otpValue, setOtpValue] = useState('')
     const [isRegister, setIsRegister] = useState(false)
-
-
 
     let apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
 

@@ -31,7 +31,7 @@ export default function Schedule() {
                         <option value="">Jwellery design</option>
                         <option value="">Fine Arts</option>
                     </select>
-                    <button type='submit' className='bg-amber-500 duration-300 mt-5 w-[100%] py-[9px] rounded hover:bg-amber-400'>Book a session</button>
+                    <button type='submit' className='bg-amber-500 duration-300 mt-5 w-[100%] py-[9px] rounded hover:bg-amber-400 font-semibold text-[18px] text-gray-900'>Book a session</button>
                 </form>
 
             </div>

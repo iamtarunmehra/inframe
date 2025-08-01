@@ -7,6 +7,7 @@ import WhyChooseUs from "./homeComponents/WhyChooseUs";
 import Testimonials from "./homeComponents/Testimonials";
 import Subscribe from "./homeComponents/Subscribe";
 import Schedule from "./homeComponents/Schedule";
+import StudentSuccess from "./homeComponents/StudentSuccess";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <WhyChooseUs />
       <Testimonials />
       <Subscribe />
+      <StudentSuccess/>
     </div>
   );
 }
