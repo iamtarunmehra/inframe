@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { courseData } from '../slice/courseSlice';
 import Link from 'next/link';
+import { courseData } from '../slice/courseSlice';
 
 
 
@@ -144,9 +144,11 @@ export default function Course() {
             ]
         },
     ]
-
     let dispatch = useDispatch()
-    dispatch(courseData(allCourse))
+
+    useEffect(() => {
+        dispatch(courseData(allCourse))
+    }, [dispatch])
 
     const [activeTab, setActiveTab] = useState('all')
 

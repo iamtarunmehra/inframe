@@ -3,12 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export let courseSlice = createSlice({
     name: 'courseData',
     initialState: {
-        courseData: []
+        courseData: [],
     },
     reducers: {
         courseData: function (state, reqData) {
             state.courseData = reqData.payload
-        }
+        },
+
     }
 })
 

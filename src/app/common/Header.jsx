@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
 import { IoMdLock, IoMdSearch } from "react-icons/io";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { FaAngleDown, FaChevronDown, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import LoginForm, { RegisterForm } from "../homeComponents/LoginForm";
+import LoginForm, { ForgotPassword, RegisterForm } from "../homeComponents/LoginForm";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
@@ -19,6 +19,9 @@ import axios from "axios";
 
 export default function Header() {
     let apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
+
+    let backgroundColor = useSelector((store) => store.courseStore.courseGradient)
+
 
     let dispatch = useDispatch()
     let router = useRouter()
@@ -131,7 +134,6 @@ export default function Header() {
     }
 
 
-
     return (
         <header className="sticky top-0 z-50">
 
@@ -218,7 +220,7 @@ export default function Header() {
                                                         .toLowerCase()
                                                         .replace(/[\s\/]+/g, "-")}`}
                                                 >
-                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-white hover:bg-amber-500">
+                                                    <button onClick={() => setMegaMenuOpen(false)} className="px-3 my-[10px] lg:mt-3 flex justify-center items-center gap-2 py-[5px] rounded-[5px] duration-300 cursor-pointer bg-white ">
                                                         Explore Now <FaLongArrowAltRight />
                                                     </button>
                                                 </Link>
@@ -341,7 +343,7 @@ export default function Header() {
             </div>
 
             {/* overlay when menu open*/}
-            {(megaMenuOpen || currentTabEdit || editModel || applyNow || loginForm || registerForm || applyNow) && (
+            {(megaMenuOpen || currentTabEdit || editModel || applyNow || activeUserTab || applyNow) && (
                 <div className="fixed top-0 left-0 z-[-10] w-[100%] h-[100vh] bg-[rgba(0,0,0,0.9)]"></div>
             )}
 
@@ -396,7 +398,10 @@ export default function Header() {
                         </button>
                         <button
                             style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
-                            onClick={() => setApplyNow(true)}
+                            onClick={() => {
+                                setApplyNow(true)
+                                setMegaMenuOpen(false)
+                            }}
                             className="px-[20px] font-semibold text-gray-900 rounded-md py-[7px] duration-500 ml-0  cursor-pointer"
                         >
                             Apply Now
@@ -421,7 +426,7 @@ export default function Header() {
                             </button>
                             :
                             <button
-                                onClick={() => setLoginForm(true)}
+                                onClick={() => setActiveUserTab('login')}
                                 className="px-[20px] rounded-md py-[7px] duration-500 border-[2px] text-amber-300 border-amber-300 hover:border-amber-400 hover:text-gray-900 ml-0 font-bold hover:bg-amber-400  cursor-pointer"
                             >
                                 Login
@@ -657,7 +662,7 @@ export default function Header() {
                         :
                         <Link href={"/"}>
                             <li
-                                onClick={() => setLoginForm(true)}
+                                onClick={() => setActiveUserTab('login')}
                                 className="text-white mb-[30px] text-[23px] uppercase font-semibold"
                             >
                                 Login
@@ -667,8 +672,9 @@ export default function Header() {
 
                     <Link href={"/"}>
                         <li
+                            style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
                             onClick={() => setApplyNow(true)}
-                            className="text-black mb-[30px] text-[20px] uppercase font-semibold bg-amber-300 w-[150px] px-[10px] py-[5px] rounded"
+                            className="text-black mb-[30px] text-[20px] uppercase font-semibold w-[150px] px-[10px] py-[5px] rounded"
                         >
                             Apply now
                         </li>
@@ -777,18 +783,22 @@ export default function Header() {
 
             {activeUserTab === 'login' &&
                 <LoginForm
-                    setLoginForm={setLoginForm}
-                    loginForm={loginForm}
-                    setRegisterForm={setRegisterForm}
+                    setActiveUserTab={setActiveUserTab}
+                    activeUserTab={activeUserTab}
                 />
             }
             {
                 activeUserTab === 'register' &&
                 <RegisterForm
-                    loginForm={loginForm}
-                    setLoginForm={setLoginForm}
-                    setRegisterForm={setRegisterForm}
-                    registerForm={registerForm}
+                    setActiveUserTab={setActiveUserTab}
+                    activeUserTab={activeUserTab}
+                />
+            }
+
+            {activeUserTab == 'forgotpassword' &&
+                <ForgotPassword
+                    setActiveUserTab={setActiveUserTab}
+                    activeUserTab={activeUserTab}
                 />
             }
 
