@@ -24,7 +24,7 @@ export default function Header() {
 
     let dispatch = useDispatch()
     let router = useRouter()
-    const [currentPage, setCurrentPage] = useState('login')
+    const [currentPage, setCurrentPage] = useState('')
     const [currentPassword, setCurrentPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
