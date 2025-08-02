@@ -20,26 +20,28 @@ export default function WhyChooseUs() {
 
     ]
     return (
-        <div className='max-w-7xl grid lg:grid-cols-[30%_auto] grid-cols-1 items-center lg:gap-[50px] mx-auto lg:my-[60px] my-[30px] lg:p-0 p-8 '>
-            <div className='p-7 rounded-[15px] border-[1px] border-gray-300 bg-white w-[100%] h-[85%] shadow-xl'>
-                <img className='w-[100%] h-[100%] object-cover' src="https://www.inframeschool.com/_next/image?url=%2Fimages%2Fgallery%2F1721366034581.jpg&w=1080&q=75" alt="" />
-            </div>
-            <div>
-                <h3 className='text-center lg:text-[40px] text-[30px] text-gray-800 mb-5 font-semibold'>Why People Choose <span className='text-amber-500'> US</span></h3>
-                <p className='lg:text-center text-justify'>At Inframe, we are committed to providing a transformative learning experience that blends industry expertise with hands-on opportunities. Our comprehensive approach ensures that students not only receive the best education but also gain the real-world experience needed to thrive in a competitive market.</p>
-                <div className='grid sm:grid-cols-2 grid-cols-1 items-center gap-x-5 my-[45px]'>
-                    {data.map((item, index) => {
-                        return (
-                            <div key={index} className='flex items-center gap-4 mb-[35px] border-2 border-gray-300 px-3 py-5 rounded-[15px]'>
-                                <p className='text-[30px] text-amber-500'>{item.icon}</p>
-                                <div>
-                                    <h3 className='text-gray-800 text-[20px] mb-2 font-semibold'>{item.title}</h3>
-                                    <p className='text-gray-700'>{item.para}</p>
+        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="w-[100%] py-[10px]">
+            <div className='max-w-7xl grid lg:grid-cols-[30%_auto] grid-cols-1 items-center lg:gap-[50px] mx-auto lg:my-[80px] my-[30px] lg:p-0 p-8 '>
+                <div className='p-7 rounded-[15px]  w-[100%] h-[85%] shadow-xl'>
+                    <img className='w-[100%] h-[100%] object-cover' src="https://www.inframeschool.com/_next/image?url=%2Fimages%2Fgallery%2F1721366034581.jpg&w=1080&q=75" alt="" />
+                </div>
+                <div>
+                    <h3 className='text-center lg:text-[40px] text-[30px] text-gray-800 mb-5 font-semibold'>Why People Choose <span className='text-amber-500'> US</span></h3>
+                    <p className='lg:text-center text-justify'>At Inframe, we are committed to providing a transformative learning experience that blends industry expertise with hands-on opportunities. Our comprehensive approach ensures that students not only receive the best education but also gain the real-world experience needed to thrive in a competitive market.</p>
+                    <div className='grid sm:grid-cols-2 grid-cols-1 items-center gap-x-5 my-[45px]'>
+                        {data.map((item, index) => {
+                            return (
+                                <div key={index} className='flex items-center gap-4 mb-[35px] shadow-2xl border-0 border-gray-600 px-3 py-5 rounded-[15px]'>
+                                    <p className='text-[30px] text-amber-500'>{item.icon}</p>
+                                    <div>
+                                        <h3 className='text-gray-800 text-[20px] mb-2 font-semibold'>{item.title}</h3>
+                                        <p className='text-gray-700'>{item.para}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
 
+                    </div>
                 </div>
             </div>
         </div>

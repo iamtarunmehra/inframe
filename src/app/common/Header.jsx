@@ -342,7 +342,7 @@ export default function Header() {
             </div>
 
             {/* overlay when menu open*/}
-            {(megaMenuOpen || currentPage || currentTabEdit || editModel || applyNow || applyNow) && (
+            {(megaMenuOpen || currentPage || currentTabEdit || editModel || applyNow) && (
                 <div className="fixed top-0 left-0 z-[-10] w-[100%] h-[100vh] bg-[rgba(0,0,0,0.9)]"></div>
             )}
 
@@ -473,11 +473,11 @@ export default function Header() {
 
                 {/* apply now form for pc */}
                 <div
-                    style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }}
+
                     className={`${applyNow
                         ? "top-[110px] right-[2%] "
                         : "top-[-100%] left-[100%] "
-                        } fixed  w-[90%] max-w-md p-6 z-50 rounded-[50px] shadow-[0_10px_25px_rgba(0,0,0,0.15)]  transition-all duration-500 ease-in-out`}
+                        } fixed  w-[90%] max-w-md p-6 z-50 bg-gradient-to-br from-amber-300 via-yellow-100 to-yellow-300 rounded-[50px] shadow-[0_10px_25px_rgba(0,0,0,0.15)]  transition-all duration-500 ease-in-out`}
                 >
                     {/* Header */}
                     <div className="relative mb-6">
@@ -554,7 +554,7 @@ export default function Header() {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full bg-white hover:bg-orange-400 hover:text-white text-black  font-semibold py-3 rounded-[10px] shadow-2xl hover:rounded-[25px] duration-300 transition-all ease-in-out "
+                            className="w-full hover:bg-orange-500 bg-orange-400 text-white   font-semibold py-3 rounded-[25px] shadow-2xl duration-300 transition-all ease-in-out "
                         >
                             Apply Now
                         </button>
@@ -574,7 +574,8 @@ export default function Header() {
                         />
                         <button
                             onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-                            className="px-[15px] cursor-pointer flex items-center gap-[4px] font-bold rounded-md py-[5px] h-[30px] bg-amber-300 group"
+                            className={`px-[15px] cursor-pointer flex items-center gap-[4px] font-bold rounded-md py-[7px] ${megaMenuOpen ? " bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400" : "bg-amber-300"
+                                } group hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 duration-300 transition-all ease-in-out`}
                         >
                             Study
                             <FaChevronDown
@@ -684,7 +685,7 @@ export default function Header() {
                 className={`${applyNow
                     ? "bottom-0 opacity-[1]"
                     : "bottom-[-100%] opacity-0"
-                    } duration-500 lg:hidden block w-[100%] h-[100vh]  fixed left-1/2 -translate-x-1/2 bg-white`}
+                    } duration-500 lg:hidden block w-[100%] h-[100vh]  fixed left-1/2 -translate-x-1/2 bg-white p-8`}
             >
                 <div className="relative mb-2">
                     <h3 className="text-[25px] text-center font-semibold text-gray-900 uppercase">

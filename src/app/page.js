@@ -15,12 +15,12 @@ export default function Home() {
       <Banner />
       <Course />
       <Feature />
-      <Schedule/>
+      <Schedule />
       <LifeAtInframe />
       <WhyChooseUs />
       <Testimonials />
       <Subscribe />
-      <StudentSuccess/>
+      <StudentSuccess />
     </div>
   );
 }

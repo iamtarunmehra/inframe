@@ -154,23 +154,25 @@ export default function Course() {
 
     let tabs = [{ name: 'all' }, { name: 'art' }, { name: 'design' }, { name: 'business' }]
     return (
-        <div className='max-w-7xl mx-auto lg:my-[60px] my-[20px] justify-between p-3 lg:p-0'>
-            <h3 className='text-center lg:text-[40px] text-[30px] text-gray-800 mb-5 font-semibold'>Our Industry-Centered <span className='text-amber-500'>Programs</span></h3>
-            <div className='flex lg:gap-[15px] gap-[5px] justify-center relative z-10'>
-                <div className='md:block hidden w-[100%] h-[3px] bg-amber-300 absolute top-[50%] translate-y-[-50%]'></div>
-                {tabs.map((item, index) => {
-                    return (
-                        <button key={index} onClick={() => setActiveTab(item.name)} className={`${activeTab === item.name ? 'bg-amber-300 text-gray-800 ' : 'bg-white hover:bg-amber-50'} w-[150px] z-20 text-amber-500  hover:text-gray-800  duration-300 lg:text-[18px] px-2 font-semibold uppercase cursor-pointer lg:py-[10px] py-[7px] border-[1px] mb-2 rounded`}>{item.name}</button>
-                    )
-                })}
-            </div>
-            <div>
-                {activeTab === 'all' && <All allCourse={allCourse} />}
-                {activeTab === 'art' && <Art allCourse={allCourse} />}
-                {activeTab === 'design' && <Design allCourse={allCourse} />}
-                {activeTab === 'business' && <Business allCourse={allCourse} />}
-            </div>
+        <div className="w-[100%] ">
+            <div className='max-w-7xl mx-auto lg:my-[80px] my-[20px] justify-between p-3 lg:p-0'>
+                <h3 className='text-center lg:text-[40px] text-[30px] text-gray-800 mb-5 font-semibold'>Our Industry-Centered <span className='text-amber-500'>Programs</span></h3>
+                <div className='flex lg:gap-[15px] gap-[5px] justify-center relative z-10'>
+                    <div className='md:block hidden w-[100%] h-[3px] bg-amber-300 absolute top-[50%] translate-y-[-50%]'></div>
+                    {tabs.map((item, index) => {
+                        return (
+                            <button key={index} onClick={() => setActiveTab(item.name)} className={`${activeTab === item.name ? 'bg-amber-300 text-gray-800 ' : 'bg-white hover:bg-amber-50'} w-[150px] z-20 text-amber-500  hover:text-gray-800  duration-300 lg:text-[18px] px-2 font-semibold uppercase cursor-pointer lg:py-[10px] py-[7px] border-[1px] mb-2 rounded`}>{item.name}</button>
+                        )
+                    })}
+                </div>
+                <div>
+                    {activeTab === 'all' && <All allCourse={allCourse} />}
+                    {activeTab === 'art' && <Art allCourse={allCourse} />}
+                    {activeTab === 'design' && <Design allCourse={allCourse} />}
+                    {activeTab === 'business' && <Business allCourse={allCourse} />}
+                </div>
 
+            </div>
         </div>
     )
 

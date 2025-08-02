@@ -10,8 +10,6 @@ import Link from 'next/link';
 
 export default function LoginForm({ currentPage, setCurrentPage, setMobileMenuOpen }) {
 
-
-
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     const [isLogin, setIsLogin] = useState(false)
@@ -91,7 +89,7 @@ export default function LoginForm({ currentPage, setCurrentPage, setMobileMenuOp
                         type="email"
                         name='userEmail'
                         required
-                        className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        className="mt-1 w-full px-4 py-[10px] border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
                     />
                 </div>
 
@@ -103,13 +101,13 @@ export default function LoginForm({ currentPage, setCurrentPage, setMobileMenuOp
                         name='userPassword'
                         type="password"
                         required
-                        className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        className="mt-1 w-full px-4 py-[10px] border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
                     />
                 </div>
 
                 <button
                     type="submit"
-                    className="w-full mt-4 py-2 px-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-md transition"
+                    className="w-full mt-4 py-[12px] px-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
                 >
                     Sign In
                 </button>
@@ -251,7 +249,7 @@ export function RegisterForm({ currentPage, setCurrentPage, setMegaMenuOpen }) {
         <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[450px] w-[95%]  rounded-2xl shadow-xl border border-amber-300 z-50 px-7 py-6 duration-300 ${currentPage == 'register' ? 'opacity-100' : 'opacity-0'}`}>
             <div className='flex justify-between items-center mb-4'>
                 <h2 className='text-[30px] font-semibold text-gray-800'>Register</h2>
-                <button onClick={() => setCurrentPage('')} className='text-2xl cursor-pointer text-gray-600 hover:text-amber-500 transition'><IoMdClose /></button>
+                <button onClick={() => setCurrentPage('')} className='text-2xl cursor-pointer text-gray-600 hover:text-gray-950 transition'><IoMdClose /></button>
             </div>
 
             <form onSubmit={userRegister} className="space-y-4">
@@ -319,7 +317,7 @@ export function RegisterForm({ currentPage, setCurrentPage, setMegaMenuOpen }) {
 
                 <button
                     type="submit"
-                    className="w-full cursor-pointer py-2 px-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-md transition"
+                    className="w-full cursor-pointer py-[10px] px-4 mt-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
                 >
                     {otpStatus ? 'VERIFY OTP' : 'GET OTP'}
                 </button>
