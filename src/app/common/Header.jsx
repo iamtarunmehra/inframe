@@ -140,7 +140,7 @@ export default function Header() {
             {/* mega menu functionality*/}
             {/* menu page */}
             <div
-                style={{ background: 'linear-gradient(184deg,rgba(255, 238, 107, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 238, 107, 1) 100%)' }}
+                style={{ background: 'linear-gradient(184deg,rgba(255, 238, 107, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 238, 107, 1) 100%) ' }}
                 className={`${megaMenuOpen
                     ? "visible opacity-[1] top-[100%]"
                     : "invisible opacity-0 top-[-100%]"
@@ -688,7 +688,7 @@ export default function Header() {
                     } duration-500 lg:hidden block w-[100%] h-[100vh]  fixed left-1/2 -translate-x-1/2 bg-white px-8 py-18`}
             >
                 <div className="relative mb-2">
-                    <h3 className="text-[25px] text-center font-semibold text-gray-900 uppercase">
+                    <h3 className="text-[25px] font-semibold text-gray-900 uppercase">
                         Fill the form
                     </h3>
                     <span
