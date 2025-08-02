@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { FaAngleDown, FaChevronDown, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import LoginForm, { ForgotPassword, RegisterForm, ResetPassword, VerifyOtp } from "../homeComponents/LoginForm";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
@@ -15,23 +14,21 @@ import { logoutUser } from "../slice/loginSlice";
 import { useRouter } from "next/navigation";
 import { FaEdit } from "react-icons/fa";
 import axios from "axios";
+import LoginForm, { RegisterForm } from "../homeComponents/LoginForm";
 
 
 export default function Header() {
     let apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
 
-    let backgroundColor = useSelector((store) => store.courseStore.courseGradient)
 
 
     let dispatch = useDispatch()
     let router = useRouter()
-    let [activeUserTab, setActiveUserTab] = useState('')
+    const [currentPage, setCurrentPage] = useState('login')
     const [currentPassword, setCurrentPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [currentTabEdit, setCurrentTabEdit] = useState('')
-    const [loginForm, setLoginForm] = useState(false);
-    const [registerForm, setRegisterForm] = useState(false)
     const [megaMenuOpen, setMegaMenuOpen] = useState(false);
     const [activeTab, setActiveTab] = useState("all");
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -136,6 +133,8 @@ export default function Header() {
 
     return (
         <header className="sticky top-0 z-50">
+            {currentPage === 'login' && <LoginForm currentPage={currentPage} setCurrentPage={setCurrentPage} setMobileMenuOpen={setMobileMenuOpen} />}
+            {currentPage === 'register' && <RegisterForm currentPage={currentPage} setCurrentPage={setCurrentPage} />}
 
 
             {/* mega menu functionality*/}
@@ -343,7 +342,7 @@ export default function Header() {
             </div>
 
             {/* overlay when menu open*/}
-            {(megaMenuOpen || currentTabEdit || editModel || applyNow || activeUserTab || applyNow) && (
+            {(megaMenuOpen || currentPage || currentTabEdit || editModel || applyNow || applyNow) && (
                 <div className="fixed top-0 left-0 z-[-10] w-[100%] h-[100vh] bg-[rgba(0,0,0,0.9)]"></div>
             )}
 
@@ -425,11 +424,12 @@ export default function Header() {
                                 </div>
                             </button>
                             :
+
                             <button
-                                onClick={() => setActiveUserTab('login')}
-                                className="px-[20px] rounded-md py-[7px] duration-500 border-[2px] text-amber-300 border-amber-300 hover:border-amber-400 hover:text-gray-900 ml-0 font-bold hover:bg-amber-400  cursor-pointer"
+                                onClick={() => setCurrentPage('login')}
+                                className="px-[20px] rounded-md py-[7px] duration-500 border-[2px]  border-amber-400 text-amber-400  hover:border-transparent hover:text-white ml-0 font-bold hover:bg-orange-400  cursor-pointer"
                             >
-                                Login
+                                Login / Sign up
                             </button>
                         }
                     </div>
@@ -477,7 +477,7 @@ export default function Header() {
                     className={`${applyNow
                         ? "top-[110px] right-[2%] "
                         : "top-[-100%] left-[100%] "
-                        } fixed  w-[90%] max-w-md p-6 z-50 rounded-3xl shadow-[0_10px_25px_rgba(0,0,0,0.15)]  transition-all duration-500 ease-in-out`}
+                        } fixed  w-[90%] max-w-md p-6 z-50 rounded-[50px] shadow-[0_10px_25px_rgba(0,0,0,0.15)]  transition-all duration-500 ease-in-out`}
                 >
                     {/* Header */}
                     <div className="relative mb-6">
@@ -498,38 +498,38 @@ export default function Header() {
                             required
                             type="text"
                             placeholder="Full Name"
-                            className="w-full px-4 py-3 border-[1px] border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+                            className="w-full px-4 py-3 border-[1px] border-gray-700 rounded-[20px] focus:outline-none focus:ring-2 focus:ring-amber-400 "
                         />
                         <input
                             required
                             type="email"
                             placeholder="Email Address"
-                            className="w-full px-4 py-3 border-[1px] border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+                            className="w-full px-4 py-3 border-[1px] border-gray-700 rounded-[20px] focus:outline-none focus:ring-2 focus:ring-amber-400 "
                         />
                         <input
                             required
                             type="tel"
                             placeholder="Phone Number"
-                            className="w-full px-4 py-3 border-[1px] border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+                            className="w-full px-4 py-3 border-[1px] border-gray-700 rounded-[20px] focus:outline-none focus:ring-2 focus:ring-amber-400 "
                         />
 
                         {/* Select Inputs */}
                         <div className="grid grid-cols-1 gap-4">
-                            <select className="w-full px-4 py-3 border rounded-lg border-gray-700 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <select className="w-full px-4 py-3 border rounded-[20px] border-gray-700 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">Select State</option>
                                 <option>Rajasthan</option>
                                 <option>Haryana</option>
                                 <option>Punjab</option>
                                 <option>Assam</option>
                             </select>
-                            <select className="w-full px-4 py-3 border rounded-lg border-gray-700 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <select className="w-full px-4 py-3 border rounded-[20px] border-gray-700 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">Select City</option>
                                 <option>Jodhpur</option>
                                 <option>Jaipur</option>
                                 <option>Ajmer</option>
                                 <option>Udaipur</option>
                             </select>
-                            <select className="w-full px-4 py-3 border rounded-lg border-gray-700 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <select className="w-full px-4 py-3 border rounded-[20px] border-gray-700 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">Select Level</option>
                                 <option>B.Des</option>
                                 <option>B.Voc</option>
@@ -539,7 +539,7 @@ export default function Header() {
                                 <option>1 Year Diploma</option>
                                 <option>6 Months Certificate</option>
                             </select>
-                            <select className="w-full px-4 py-3 border rounded-lg border-gray-700 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <select className="w-full px-4 py-3 border rounded-[20px] border-gray-700 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
                                 <option value="">Select Program</option>
                                 <option>B.Des</option>
                                 <option>B.Voc</option>
@@ -554,7 +554,7 @@ export default function Header() {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full bg-white hover:text-amber-500 text-black  font-semibold py-3 rounded-lg transition"
+                            className="w-full bg-white hover:bg-orange-400 hover:text-white text-black  font-semibold py-3 rounded-[10px] shadow-2xl hover:rounded-[25px] duration-300 transition-all ease-in-out "
                         >
                             Apply Now
                         </button>
@@ -597,7 +597,6 @@ export default function Header() {
                 className={`${mobileMenuOpen ? "left-0 opacity-[1]" : "-left-[100%] opacity-0"
                     } duration-300 fixed top-0 w-[100%] h-[100vh] bg-black/95 `}>
                 <div className="flex justify-between px-5 py-5">
-                    {(loginForm || registerForm) && <div className="w-[100%] h-[100vh] absolute top-0 left-0 bg-black/90"></div>}
 
                     <img
                         className="w-[180px]"
@@ -650,7 +649,7 @@ export default function Header() {
                     {token ?
                         <Link href={"/"}>
                             <li
-                                onClick={() => setLoginForm(true)}
+
                                 className="text-white mb-[30px] text-[23px] uppercase font-semibold"
                             >
                                 My Account
@@ -659,7 +658,7 @@ export default function Header() {
                         :
                         <Link href={"/"}>
                             <li
-                                onClick={() => setActiveUserTab('login')}
+                                onClick={() => setCurrentPage('login')}
                                 className="text-white mb-[30px] text-[23px] uppercase font-semibold"
                             >
                                 Login
@@ -685,7 +684,7 @@ export default function Header() {
                 className={`${applyNow
                     ? "bottom-0 opacity-[1]"
                     : "bottom-[-100%] opacity-0"
-                    } duration-500 lg:hidden block w-[100%] h-auto p-5 fixed left-1/2 -translate-x-1/2 bg-white`}
+                    } duration-500 lg:hidden block w-[100%] h-[100vh] px-5 py-10  fixed left-1/2 -translate-x-1/2 bg-white`}
             >
                 <div className="relative mb-2">
                     <h3 className="text-[25px] text-center font-semibold text-gray-900 uppercase">
@@ -776,32 +775,6 @@ export default function Header() {
                 </form>
             </div>
 
-
-
-            {activeUserTab === 'login' &&
-                <LoginForm
-                    setActiveUserTab={setActiveUserTab}
-                    activeUserTab={activeUserTab}
-                />
-            }
-            {
-                activeUserTab === 'register' &&
-                <RegisterForm
-                    setActiveUserTab={setActiveUserTab}
-                    activeUserTab={activeUserTab}
-                />
-            }
-
-            {activeUserTab == 'forgotpassword' &&
-                <ForgotPassword
-                    setActiveUserTab={setActiveUserTab}
-                    activeUserTab={activeUserTab}
-                />
-            }
-
-            {activeUserTab == 'resetPassword' &&
-                <ResetPassword />
-            }
 
 
         </header>

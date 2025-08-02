@@ -6,8 +6,11 @@ import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { loginData } from '../slice/loginSlice';
+import Link from 'next/link';
 
-export default function LoginForm({ activeUserTab, setActiveUserTab }) {
+export default function LoginForm({ currentPage, setCurrentPage, setMobileMenuOpen }) {
+
+
 
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
@@ -73,10 +76,10 @@ export default function LoginForm({ activeUserTab, setActiveUserTab }) {
     }, [isLogin])
 
     return (
-        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[400px] w-[95%] rounded-2xl shadow-xl border border-amber-300 z-50 px-6 py-6 duration-300 ${activeUserTab == 'login' ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
+        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[400px] w-[95%] rounded-2xl shadow-xl border border-amber-300 z-50 px-6 py-6 duration-300`}>
             <div className='flex justify-between items-center mb-4'>
                 <h2 className='text-[30px] font-semibold text-gray-800'>Login</h2>
-                <button onClick={() => setActiveUserTab('')} className='text-2xl cursor-pointer text-gray-600 hover:text-amber-500 transition'><IoMdClose /></button>
+                <button onClick={() => setCurrentPage('')} className='text-2xl cursor-pointer text-gray-600 hover:text-gray-950 transition'><IoMdClose /></button>
             </div>
 
             <form onSubmit={userLogin} className="space-y-4">
@@ -116,7 +119,7 @@ export default function LoginForm({ activeUserTab, setActiveUserTab }) {
                 Don't have an account?{' '}
                 <span
                     onClick={() => {
-                        setActiveUserTab('register')
+                        setCurrentPage('register')
                     }}
                     className="text-black font-medium cursor-pointer hover:underline"
                 >
@@ -124,175 +127,23 @@ export default function LoginForm({ activeUserTab, setActiveUserTab }) {
                 </span>
             </p>
             <p className="text-center text-sm text-gray-950 mt-1">
-                <span
+                <Link href={'/forgot-password'}><span
                     onClick={() => {
-                        setActiveUserTab('forgotpassword')
+                        setCurrentPage('')
+                        setMobileMenuOpen(false)
                     }}
                     className="text-black font-medium cursor-pointer hover:underline"
                 >
                     Forgot password ?
-                </span>
+                </span></Link>
             </p>
         </div>
     )
 
 }
 
-export function ForgotPassword({ setActiveUserTab, activeUserTab }) {
-    const token = useSelector((store) => store.loginStore)
-    console.log(token)
-    const [otpStatus, setOtpStatus] = useState(false)
-    const [otpValue, setOtpValue] = useState(false)
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
-    const [userEmail, setUserEmail] = useState('')
-    let forgotPassword = (event) => {
-        event.preventDefault();
-        if (otpStatus) {
-            let obj = { userEmail, otpValue }
-            axios.post(`${apiBaseUrl}/user/verify-otp`, obj)
-                .then((res) => res.data)
-                .then((finalRes) => {
-                    if (finalRes.status == 1) {
-                        setActiveUserTab('resetPassword')
-                        Swal.fire({
-                            title: 'OTP Verified',
-                            icon: 'success',
-                            iconColor: '#332A2A',
-                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
-                            confirmButtonColor: '#332A2A',
-                            timer: 2000,
-                        })
-                    }
-                    else {
-                        Swal.fire({
-                            title: 'OTP Is Invalid',
-                            text: 'Recheck your email to verify',
-                            icon: 'error',
-                            iconColor: '#332A2A',
-                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
-                            confirmButtonColor: '#332A2A',
-                            timer: 2000,
-                        })
-                    }
-                })
-        }
-        else {
-            axios.post(`${apiBaseUrl}/user/forgot-password`, { userEmail })
-                .then((res) => res.data)
-                .then((finalRes) => {
-                    if (finalRes.status == 1) {
-                        setOtpStatus(true)
-                        Swal.fire({
-                            title: 'OTP Sent',
-                            text: 'Check your email to verify',
-                            icon: 'success',
-                            iconColor: '#332A2A',
-                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
-                            confirmButtonColor: '#332A2A',
-                            timer: 2000,
-                        })
-                    }
-                    else {
-                        Swal.fire({
-                            title: 'Email ID Not Exist !',
-                            text: 'Check your email to verify',
-                            icon: 'warning',
-                            iconColor: '#332A2A',
-                            background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)',
-                            confirmButtonColor: '#332A2A',
-                            timer: 2000,
-                        })
-                    }
-                })
-        }
-    }
 
-    return (
-        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  lg:w-[400px] w-[350px] rounded-[10px]  px-6 py-5 h-[auto] ">
-            <h4 className=" flex justify-between text-gray-800 font-semibold text-[25px]">Forgot Password
-                <span onClick={() => {
-                    setActiveUserTab('')
-                }} className="text-[28px] cursor-pointer hover:text-gray-900 duration-300">&times;</span>
-            </h4>
-            <form onSubmit={forgotPassword} action="">
-                <div className='my-[20px]'>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Enter your Email ID</label>
-                    <input
-                        onChange={(e) => setUserEmail(e.target.value)}
-                        name='userEmail'
-                        id="userEmail"
-                        type="email"
-                        required
-                        className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
-                    />
-                </div>
-                {otpStatus &&
-                    <div className='my-[20px]'>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Enter OTP</label>
-                        <input
-                            onChange={(e) => setOtpValue(e.target.value)}
-                            name='otpValue'
-                            id="otpValue"
-                            type="text"
-                            required
-                            className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
-                        />
-                    </div>
-                }
-                <button type='submit' className='w-[100%] rounded-[10px] hover:bg-orange-500 bg-white shadow-2xl shadow-amber-300  hover:text-white font-semibold py-[10px] duration-300'>{otpStatus ? 'Verify OTP' : 'Send OTP'}</button>
-            </form>
-        </div>
-    )
-}
-
-export function ResetPassword() {
-    let apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
-    const [newPassword, setNewPassword] = useState('')
-
-    let resetPassword = (event) => {
-        axios.post(`${apiBaseUrl}/user/reset-password`)
-    }
-
-    return (
-        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  lg:w-[400px] w-[350px] rounded-[10px]  px-6 py-5 h-[auto] ">
-            <h4 className=" flex justify-between text-gray-800 font-semibold text-[25px]">Forgot Password
-                <span onClick={() => {
-                    setActiveUserTab('')
-                }} className="text-[28px] cursor-pointer hover:text-gray-900 duration-300">&times;</span>
-            </h4>
-            <form onSubmit={resetPassword} action="">
-                <div className='my-[20px]'>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Enter your Email ID</label>
-                    <input
-                        onChange={(e) => setUserEmail(e.target.value)}
-                        name='userEmail'
-                        id="userEmail"
-                        type="email"
-                        required
-                        className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
-                    />
-                </div>
-                {otpStatus &&
-                    <div className='my-[20px]'>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Enter OTP</label>
-                        <input
-                            onChange={(e) => setOtpValue(e.target.value)}
-                            name='otpValue'
-                            id="otpValue"
-                            type="text"
-                            required
-                            className="mt-1 w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400"
-                        />
-                    </div>
-                }
-                <button type='submit' className='w-[100%] rounded-[10px] hover:bg-orange-500 bg-white shadow-2xl shadow-amber-300  hover:text-white font-semibold py-[10px] duration-300'>{otpStatus ? 'Verify OTP' : 'Send OTP'}</button>
-            </form>
-        </div>
-    )
-}
-
-
-export function RegisterForm({ activeUserTab, setActiveUserTab }) {
+export function RegisterForm({ currentPage, setCurrentPage, setMegaMenuOpen }) {
 
     const [userName, setUserName] = useState('')
     const [userEmail, setUserEmail] = useState('')
@@ -392,16 +243,15 @@ export function RegisterForm({ activeUserTab, setActiveUserTab }) {
 
     useEffect(() => {
         if (isRegister) {
-            setActiveUserTab('login')
+            setCurrentPage('login')
         }
     }, [isRegister])
 
     return (
-
-        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[450px] w-[95%]  rounded-2xl shadow-xl border border-amber-300 z-50 px-7 py-6 duration-300 ${activeUserTab == 'register' ? 'opacity-100' : 'opacity-0'}`}>
+        <div style={{ background: 'linear-gradient(154deg,rgba(182, 189, 0, 1) 0%, rgba(255, 248, 189, 1) 50%, rgba(255, 229, 0, 1) 100%)' }} className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-[450px] w-[95%]  rounded-2xl shadow-xl border border-amber-300 z-50 px-7 py-6 duration-300 ${currentPage == 'register' ? 'opacity-100' : 'opacity-0'}`}>
             <div className='flex justify-between items-center mb-4'>
                 <h2 className='text-[30px] font-semibold text-gray-800'>Register</h2>
-                <button onClick={() => setActiveUserTab('')} className='text-2xl cursor-pointer text-gray-600 hover:text-amber-500 transition'><IoMdClose /></button>
+                <button onClick={() => setCurrentPage('')} className='text-2xl cursor-pointer text-gray-600 hover:text-amber-500 transition'><IoMdClose /></button>
             </div>
 
             <form onSubmit={userRegister} className="space-y-4">
@@ -480,7 +330,7 @@ export function RegisterForm({ activeUserTab, setActiveUserTab }) {
                 Already have an account?{' '}
                 <span
                     onClick={() => {
-                        setActiveUserTab('login')
+                        setCurrentPage('login')
                     }}
                     className="text-black font-medium cursor-pointer hover:underline"
                 >
