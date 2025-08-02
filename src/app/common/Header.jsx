@@ -685,7 +685,7 @@ export default function Header() {
                 className={`${applyNow
                     ? "bottom-0 opacity-[1]"
                     : "bottom-[-100%] opacity-0"
-                    } duration-500 lg:hidden block w-[100%] h-[100vh]  fixed left-1/2 -translate-x-1/2 bg-white px-8 py-15`}
+                    } duration-500 lg:hidden block w-[100%] h-[100vh]  fixed left-1/2 -translate-x-1/2 bg-white px-8 py-18`}
             >
                 <div className="relative mb-2">
                     <h3 className="text-[25px] text-center font-semibold text-gray-900 uppercase">
