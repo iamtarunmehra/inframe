@@ -6,7 +6,7 @@ export default function Schedule() {
             <div className='max-w-7xl p-3 lg:p-0 mx-auto lg:my-[80px] my-[20px] grid sm:grid-cols-[40%_auto] grid-cols-1 items-center gap-10'>
                 <div
                     style={{ background: 'linear-gradient(328deg,rgba(153, 76, 3, 1) 0%, rgba(255, 211, 153, 1) 49%, rgba(251, 255, 41, 1) 100%)' }}
-                    className='shadow-lg shadow-amber-500 p-7 rounded-t-[50px]'>
+                    className='shadow-lg shadow-amber-500 p-7 rounded-t-[70px]'>
                     <h3 className='text-[30px] text-gray-900 font-semibold'>Schedule a Free Session</h3>
                     <form action="">
                         <div className='my-[15px]'>
