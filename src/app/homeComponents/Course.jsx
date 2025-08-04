@@ -189,7 +189,7 @@ function All({ allCourse }) {
                     allCourse.map((item, index) => {
                         let { points } = item
                         return (
-                            <div key={index} className='bg-white w-[100%] shadow-lg hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 group overflow-hidden group h-auto my-[40px] hover:shadow-2xl shadow-amber-300 duration-300 rounded-[20px]'>
+                            <div key={index} className='bg-white w-[100%] shadow-lg hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 group overflow-hidden group h-[500px] my-[40px] hover:shadow-2xl shadow-amber-300 duration-300 rounded-[20px]'>
                                 <img className='w-[100%] duration-300 group-hover:scale-[1.1] rounded-t-[20px] h-[40%] object-cover' src={item.src} alt="" />
                                 <div className='px-7 pt-3 h-[70%]'>
                                     <h2 className='text-gray-900 my-[10px] font-semibold text-[24px]'>{item.name}</h2>
@@ -218,7 +218,7 @@ function Art({ allCourse }) {
             {data.map((item, index) => {
                 let { points } = item
                 return (
-                    <div key={index} className='bg-white w-[100%] shadow-lg hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 group overflow-hidden group h-auto my-[40px] hover:shadow-2xl shadow-amber-300 duration-300 rounded-[20px]'>
+                    <div key={index} className='bg-white w-[100%] shadow-lg hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 group overflow-hidden group h-[500px] my-[40px] hover:shadow-2xl shadow-amber-300 duration-300 rounded-[20px]'>
                         <img className='w-[100%] z-10 group-hover:scale-[1.1] duration-300 rounded-t-[20px] h-[40%] object-cover' src={item.src} alt="" />
                         <div className='px-7 pt-3 '>
                             <h2 className='text-gray-900 my-[10px] font-semibold text-[24px]'>{item.name}</h2>
@@ -245,7 +245,7 @@ function Design({ allCourse }) {
             {data.map((item, index) => {
                 let { points } = item
                 return (
-                    <div key={index} className='bg-white w-[100%] shadow-lg hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 group overflow-hidden group h-auto my-[40px] hover:shadow-2xl shadow-amber-300 duration-300 rounded-[20px]'>
+                    <div key={index} className='bg-white w-[100%] shadow-lg hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 group overflow-hidden group h-[500px] my-[40px] hover:shadow-2xl shadow-amber-300 duration-300 rounded-[20px]'>
                         <img className='w-[100%] group-hover:scale-[1.1] duration-300 rounded-t-[20px] h-[40%] object-cover' src={item.src} alt="" />
                         <div className='px-7 pt-3 h-[70%]'>
                             <h2 className='text-gray-900 my-[10px] font-semibold text-[24px]'>{item.name}</h2>
@@ -272,7 +272,7 @@ function Business({ allCourse }) {
             {data.map((item, index) => {
                 let { points } = item
                 return (
-                    <div key={index} className='bg-white w-[100%] shadow-lg hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 group overflow-hidden group h-auto my-[40px] hover:shadow-2xl shadow-amber-300 duration-300 rounded-[20px]'>
+                    <div key={index} className='bg-white w-[100%] shadow-lg hover:bg-gradient-to-br from-amber-400 via-yellow-100 to-yellow-400 group overflow-hidden group h-[500px] my-[40px] hover:shadow-2xl shadow-amber-300 duration-300 rounded-[20px]'>
                         <img className='w-[100%] rounded-t-[20px] duration-300 group-hover:scale-[1.1] h-[40%] object-cover' src={item.src} alt="" />
                         <div className='px-7 pt-3 h-[70%]'>
                             <h2 className='text-gray-900 my-[10px] font-semibold text-[24px]'>{item.name}</h2>
