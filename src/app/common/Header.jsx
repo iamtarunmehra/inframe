@@ -651,7 +651,7 @@ export default function Header() {
 
             {/* header for mobile and small devices */}
             <div className="lg:hidden block relative w-[100%] py-[15px] bg-black">
-                <div className="flex items-center px-5 justify-between">
+                <div className="flex items-center px-3 justify-between">
                     <div className="flex gap-5 items-center">
                         <img
                             className="w-[120px]"
@@ -737,9 +737,9 @@ export default function Header() {
                         </li>
                     </Link>
                     {token ?
-                        <Link href={"/"}>
+                        <Link href={"/my-account"}>
                             <li
-
+                                onClick={() => setMobileMenuOpen(false)}
                                 className="text-white mb-[30px] text-[23px] uppercase font-semibold"
                             >
                                 My Account
