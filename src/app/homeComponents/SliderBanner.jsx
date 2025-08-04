@@ -11,7 +11,7 @@ export default function SliderBanner() {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
     };
     return (
         <div className="w-[100%] bg-gray-100 py-[30px]">
