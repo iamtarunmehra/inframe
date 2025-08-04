@@ -12,7 +12,7 @@ export default function StudentSuccess() {
             <div className='max-w-7xl p-3 lg:p-0 mx-auto lg:my-[80px] my-[20px]'>
                 <h3 className='lg:text-[40px] text-[30px] text-gray-800 mb-5 font-semibold'>Student <span className='text-amber-500'>Success </span>Stories</h3>
                 <p className='text-gray-800 text-[23px]'>Discover how our platform has transformed the learning journey of our students Sufiyan</p>
-                <div className='grid lg:grid-cols-4 grid-cols-2 my-[40px] lg:gap-10 gap-10'>
+                <div className='grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 my-[40px] lg:gap-10 gap-10'>
 
                     {studentData.map((item, index) => {
                         return (
