@@ -59,7 +59,6 @@ export default function Page() {
                             <div className="bg-transparent p-6">
                                 <h3 className="text-xl font-semibold mt-4 text-gray-900">
                                     {item}
-
                                 </h3>
                                 <p className="mt-3 text-sm text-gray-600 leading-relaxed">
                                     Transform spaces and shape experiences through our comprehensive design program.

@@ -9,6 +9,8 @@ import { FaChevronUp } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa6";
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
+import ComboPack from '@/app/homeComponents/ComboPack';
+import Customizecourse from '@/app/homeComponents/Customizecourse';
 
 
 export default function Page() {
@@ -299,6 +301,9 @@ export default function Page() {
                 </div>
 
             </div>
+
+            <ComboPack />
+            <Customizecourse />
 
             <div className='w-[100%] bg-white lg:py-[20px] lg:mb-0 sm:py-[20px]'>
                 <div className='max-w-7xl p-3 lg:p-0 mx-auto '>
