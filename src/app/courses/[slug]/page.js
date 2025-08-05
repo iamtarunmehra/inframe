@@ -1,4 +1,6 @@
 'use client'
+import ComboPack from '@/app/homeComponents/ComboPack'
+import Customizecourse from '@/app/homeComponents/Customizecourse'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import React from 'react'
@@ -72,6 +74,8 @@ export default function Page() {
 
 
             </div>
+            <ComboPack />
+            <Customizecourse />
         </div>
 
     )

@@ -9,6 +9,9 @@ import Subscribe from "./homeComponents/Subscribe";
 import Schedule from "./homeComponents/Schedule";
 import StudentSuccess from "./homeComponents/StudentSuccess";
 import SliderBanner from "./homeComponents/SliderBanner";
+import ComboPack from "./homeComponents/ComboPack";
+import Customizecourse from "./homeComponents/Customizecourse";
+import CourseSearch from "./homeComponents/Demo";
 
 export default function Home() {
   return (
@@ -22,6 +25,8 @@ export default function Home() {
       <Testimonials />
       <Subscribe />
       <StudentSuccess />
+      {/* <ComboPack />
+      <Customizecourse /> */}
     </div>
   );
 }
